@@ -1,0 +1,1674 @@
+//By:Ali Rajabpour-Sanati | ali.poursanati@gmail.com
+//@version=5
+indicator(title='💎ARPS Ultimate Trading Solution (A)💎', shorttitle='💎ARPS Ultimate Trading Solution (A)💎', overlay=true)
+
+// ***********************************************************************************
+//------------------------------------- Ehlers Stochastic CG Oscillator ----------------------------------------//
+
+escgo_src = hl2  //defval=hl2, title="Source"
+escgo_length = 8  //defval=8, title="Length", minval=1, maxval=100
+lvls = 0.8  //defval=0.8, title="OB/OS Level"
+fr = false  //defval=true, title="Fill Osc/Trigger region"
+
+nm0 = 0
+dm0 = 0
+nm1 = 1 <= escgo_length ? nm0 + (1 + 0) * escgo_src[0] : nm0
+dm1 = 1 <= escgo_length ? dm0 + escgo_src[0] : dm0
+nm2 = 2 <= escgo_length ? nm1 + (1 + 1) * escgo_src[1] : nm1
+dm2 = 2 <= escgo_length ? dm1 + escgo_src[1] : dm1
+nm3 = 3 <= escgo_length ? nm2 + (1 + 2) * escgo_src[2] : nm2
+dm3 = 3 <= escgo_length ? dm2 + escgo_src[2] : dm2
+nm4 = 4 <= escgo_length ? nm3 + (1 + 3) * escgo_src[3] : nm3
+dm4 = 4 <= escgo_length ? dm3 + escgo_src[3] : dm3
+nm5 = 5 <= escgo_length ? nm4 + (1 + 4) * escgo_src[4] : nm4
+dm5 = 5 <= escgo_length ? dm4 + escgo_src[4] : dm4
+nm6 = 6 <= escgo_length ? nm5 + (1 + 5) * escgo_src[5] : nm5
+dm6 = 6 <= escgo_length ? dm5 + escgo_src[5] : dm5
+nm7 = 7 <= escgo_length ? nm6 + (1 + 6) * escgo_src[6] : nm6
+dm7 = 7 <= escgo_length ? dm6 + escgo_src[6] : dm6
+nm8 = 8 <= escgo_length ? nm7 + (1 + 7) * escgo_src[7] : nm7
+dm8 = 8 <= escgo_length ? dm7 + escgo_src[7] : dm7
+nm9 = 9 <= escgo_length ? nm8 + (1 + 8) * escgo_src[8] : nm8
+dm9 = 9 <= escgo_length ? dm8 + escgo_src[8] : dm8
+nm10 = 10 <= escgo_length ? nm9 + (1 + 9) * escgo_src[9] : nm9
+dm10 = 10 <= escgo_length ? dm9 + escgo_src[9] : dm9
+nm11 = 11 <= escgo_length ? nm10 + (1 + 10) * escgo_src[10] : nm10
+dm11 = 11 <= escgo_length ? dm10 + escgo_src[10] : dm10
+nm12 = 12 <= escgo_length ? nm11 + (1 + 11) * escgo_src[11] : nm11
+dm12 = 12 <= escgo_length ? dm11 + escgo_src[11] : dm11
+nm13 = 13 <= escgo_length ? nm12 + (1 + 12) * escgo_src[12] : nm12
+dm13 = 13 <= escgo_length ? dm12 + escgo_src[12] : dm12
+nm14 = 14 <= escgo_length ? nm13 + (1 + 13) * escgo_src[13] : nm13
+dm14 = 14 <= escgo_length ? dm13 + escgo_src[13] : dm13
+nm15 = 15 <= escgo_length ? nm14 + (1 + 14) * escgo_src[14] : nm14
+dm15 = 15 <= escgo_length ? dm14 + escgo_src[14] : dm14
+nm16 = 16 <= escgo_length ? nm15 + (1 + 15) * escgo_src[15] : nm15
+dm16 = 16 <= escgo_length ? dm15 + escgo_src[15] : dm15
+nm17 = 17 <= escgo_length ? nm16 + (1 + 16) * escgo_src[16] : nm16
+dm17 = 17 <= escgo_length ? dm16 + escgo_src[16] : dm16
+nm18 = 18 <= escgo_length ? nm17 + (1 + 17) * escgo_src[17] : nm17
+dm18 = 18 <= escgo_length ? dm17 + escgo_src[17] : dm17
+nm19 = 19 <= escgo_length ? nm18 + (1 + 18) * escgo_src[18] : nm18
+dm19 = 19 <= escgo_length ? dm18 + escgo_src[18] : dm18
+nm20 = 20 <= escgo_length ? nm19 + (1 + 19) * escgo_src[19] : nm19
+dm20 = 20 <= escgo_length ? dm19 + escgo_src[19] : dm19
+nm21 = 21 <= escgo_length ? nm20 + (1 + 20) * escgo_src[20] : nm20
+dm21 = 21 <= escgo_length ? dm20 + escgo_src[20] : dm20
+nm22 = 22 <= escgo_length ? nm21 + (1 + 21) * escgo_src[21] : nm21
+dm22 = 22 <= escgo_length ? dm21 + escgo_src[21] : dm21
+nm23 = 23 <= escgo_length ? nm22 + (1 + 22) * escgo_src[22] : nm22
+dm23 = 23 <= escgo_length ? dm22 + escgo_src[22] : dm22
+nm24 = 24 <= escgo_length ? nm23 + (1 + 23) * escgo_src[23] : nm23
+dm24 = 24 <= escgo_length ? dm23 + escgo_src[23] : dm23
+nm25 = 25 <= escgo_length ? nm24 + (1 + 24) * escgo_src[24] : nm24
+dm25 = 25 <= escgo_length ? dm24 + escgo_src[24] : dm24
+nm26 = 26 <= escgo_length ? nm25 + (1 + 25) * escgo_src[25] : nm25
+dm26 = 26 <= escgo_length ? dm25 + escgo_src[25] : dm25
+nm27 = 27 <= escgo_length ? nm26 + (1 + 26) * escgo_src[26] : nm26
+dm27 = 27 <= escgo_length ? dm26 + escgo_src[26] : dm26
+nm28 = 28 <= escgo_length ? nm27 + (1 + 27) * escgo_src[27] : nm27
+dm28 = 28 <= escgo_length ? dm27 + escgo_src[27] : dm27
+nm29 = 29 <= escgo_length ? nm28 + (1 + 28) * escgo_src[28] : nm28
+dm29 = 29 <= escgo_length ? dm28 + escgo_src[28] : dm28
+nm30 = 30 <= escgo_length ? nm29 + (1 + 29) * escgo_src[29] : nm29
+dm30 = 30 <= escgo_length ? dm29 + escgo_src[29] : dm29
+nm31 = 31 <= escgo_length ? nm30 + (1 + 30) * escgo_src[30] : nm30
+dm31 = 31 <= escgo_length ? dm30 + escgo_src[30] : dm30
+nm32 = 32 <= escgo_length ? nm31 + (1 + 31) * escgo_src[31] : nm31
+dm32 = 32 <= escgo_length ? dm31 + escgo_src[31] : dm31
+nm33 = 33 <= escgo_length ? nm32 + (1 + 32) * escgo_src[32] : nm32
+dm33 = 33 <= escgo_length ? dm32 + escgo_src[32] : dm32
+nm34 = 34 <= escgo_length ? nm33 + (1 + 33) * escgo_src[33] : nm33
+dm34 = 34 <= escgo_length ? dm33 + escgo_src[33] : dm33
+nm35 = 35 <= escgo_length ? nm34 + (1 + 34) * escgo_src[34] : nm34
+dm35 = 35 <= escgo_length ? dm34 + escgo_src[34] : dm34
+nm36 = 36 <= escgo_length ? nm35 + (1 + 35) * escgo_src[35] : nm35
+dm36 = 36 <= escgo_length ? dm35 + escgo_src[35] : dm35
+nm37 = 37 <= escgo_length ? nm36 + (1 + 36) * escgo_src[36] : nm36
+dm37 = 37 <= escgo_length ? dm36 + escgo_src[36] : dm36
+nm38 = 38 <= escgo_length ? nm37 + (1 + 37) * escgo_src[37] : nm37
+dm38 = 38 <= escgo_length ? dm37 + escgo_src[37] : dm37
+nm39 = 39 <= escgo_length ? nm38 + (1 + 38) * escgo_src[38] : nm38
+dm39 = 39 <= escgo_length ? dm38 + escgo_src[38] : dm38
+nm40 = 40 <= escgo_length ? nm39 + (1 + 39) * escgo_src[39] : nm39
+dm40 = 40 <= escgo_length ? dm39 + escgo_src[39] : dm39
+nm41 = 41 <= escgo_length ? nm40 + (1 + 40) * escgo_src[40] : nm40
+dm41 = 41 <= escgo_length ? dm40 + escgo_src[40] : dm40
+nm42 = 42 <= escgo_length ? nm41 + (1 + 41) * escgo_src[41] : nm41
+dm42 = 42 <= escgo_length ? dm41 + escgo_src[41] : dm41
+nm43 = 43 <= escgo_length ? nm42 + (1 + 42) * escgo_src[42] : nm42
+dm43 = 43 <= escgo_length ? dm42 + escgo_src[42] : dm42
+nm44 = 44 <= escgo_length ? nm43 + (1 + 43) * escgo_src[43] : nm43
+dm44 = 44 <= escgo_length ? dm43 + escgo_src[43] : dm43
+nm45 = 45 <= escgo_length ? nm44 + (1 + 44) * escgo_src[44] : nm44
+dm45 = 45 <= escgo_length ? dm44 + escgo_src[44] : dm44
+nm46 = 46 <= escgo_length ? nm45 + (1 + 45) * escgo_src[45] : nm45
+dm46 = 46 <= escgo_length ? dm45 + escgo_src[45] : dm45
+nm47 = 47 <= escgo_length ? nm46 + (1 + 46) * escgo_src[46] : nm46
+dm47 = 47 <= escgo_length ? dm46 + escgo_src[46] : dm46
+nm48 = 48 <= escgo_length ? nm47 + (1 + 47) * escgo_src[47] : nm47
+dm48 = 48 <= escgo_length ? dm47 + escgo_src[47] : dm47
+nm49 = 49 <= escgo_length ? nm48 + (1 + 48) * escgo_src[48] : nm48
+dm49 = 49 <= escgo_length ? dm48 + escgo_src[48] : dm48
+nm50 = 50 <= escgo_length ? nm49 + (1 + 49) * escgo_src[49] : nm49
+dm50 = 50 <= escgo_length ? dm49 + escgo_src[49] : dm49
+nm51 = 51 <= escgo_length ? nm50 + (1 + 50) * escgo_src[50] : nm50
+dm51 = 51 <= escgo_length ? dm50 + escgo_src[50] : dm50
+nm52 = 52 <= escgo_length ? nm51 + (1 + 51) * escgo_src[51] : nm51
+dm52 = 52 <= escgo_length ? dm51 + escgo_src[51] : dm51
+nm53 = 53 <= escgo_length ? nm52 + (1 + 52) * escgo_src[52] : nm52
+dm53 = 53 <= escgo_length ? dm52 + escgo_src[52] : dm52
+nm54 = 54 <= escgo_length ? nm53 + (1 + 53) * escgo_src[53] : nm53
+dm54 = 54 <= escgo_length ? dm53 + escgo_src[53] : dm53
+nm55 = 55 <= escgo_length ? nm54 + (1 + 54) * escgo_src[54] : nm54
+dm55 = 55 <= escgo_length ? dm54 + escgo_src[54] : dm54
+nm56 = 56 <= escgo_length ? nm55 + (1 + 55) * escgo_src[55] : nm55
+dm56 = 56 <= escgo_length ? dm55 + escgo_src[55] : dm55
+nm57 = 57 <= escgo_length ? nm56 + (1 + 56) * escgo_src[56] : nm56
+dm57 = 57 <= escgo_length ? dm56 + escgo_src[56] : dm56
+nm58 = 58 <= escgo_length ? nm57 + (1 + 57) * escgo_src[57] : nm57
+dm58 = 58 <= escgo_length ? dm57 + escgo_src[57] : dm57
+nm59 = 59 <= escgo_length ? nm58 + (1 + 58) * escgo_src[58] : nm58
+dm59 = 59 <= escgo_length ? dm58 + escgo_src[58] : dm58
+nm60 = 60 <= escgo_length ? nm59 + (1 + 59) * escgo_src[59] : nm59
+dm60 = 60 <= escgo_length ? dm59 + escgo_src[59] : dm59
+nm61 = 61 <= escgo_length ? nm60 + (1 + 60) * escgo_src[60] : nm60
+dm61 = 61 <= escgo_length ? dm60 + escgo_src[60] : dm60
+nm62 = 62 <= escgo_length ? nm61 + (1 + 61) * escgo_src[61] : nm61
+dm62 = 62 <= escgo_length ? dm61 + escgo_src[61] : dm61
+nm63 = 63 <= escgo_length ? nm62 + (1 + 62) * escgo_src[62] : nm62
+dm63 = 63 <= escgo_length ? dm62 + escgo_src[62] : dm62
+nm64 = 64 <= escgo_length ? nm63 + (1 + 63) * escgo_src[63] : nm63
+dm64 = 64 <= escgo_length ? dm63 + escgo_src[63] : dm63
+nm65 = 65 <= escgo_length ? nm64 + (1 + 64) * escgo_src[64] : nm64
+dm65 = 65 <= escgo_length ? dm64 + escgo_src[64] : dm64
+nm66 = 66 <= escgo_length ? nm65 + (1 + 65) * escgo_src[65] : nm65
+dm66 = 66 <= escgo_length ? dm65 + escgo_src[65] : dm65
+nm67 = 67 <= escgo_length ? nm66 + (1 + 66) * escgo_src[66] : nm66
+dm67 = 67 <= escgo_length ? dm66 + escgo_src[66] : dm66
+nm68 = 68 <= escgo_length ? nm67 + (1 + 67) * escgo_src[67] : nm67
+dm68 = 68 <= escgo_length ? dm67 + escgo_src[67] : dm67
+nm69 = 69 <= escgo_length ? nm68 + (1 + 68) * escgo_src[68] : nm68
+dm69 = 69 <= escgo_length ? dm68 + escgo_src[68] : dm68
+nm70 = 70 <= escgo_length ? nm69 + (1 + 69) * escgo_src[69] : nm69
+dm70 = 70 <= escgo_length ? dm69 + escgo_src[69] : dm69
+nm71 = 71 <= escgo_length ? nm70 + (1 + 70) * escgo_src[70] : nm70
+dm71 = 71 <= escgo_length ? dm70 + escgo_src[70] : dm70
+nm72 = 72 <= escgo_length ? nm71 + (1 + 71) * escgo_src[71] : nm71
+dm72 = 72 <= escgo_length ? dm71 + escgo_src[71] : dm71
+nm73 = 73 <= escgo_length ? nm72 + (1 + 72) * escgo_src[72] : nm72
+dm73 = 73 <= escgo_length ? dm72 + escgo_src[72] : dm72
+nm74 = 74 <= escgo_length ? nm73 + (1 + 73) * escgo_src[73] : nm73
+dm74 = 74 <= escgo_length ? dm73 + escgo_src[73] : dm73
+nm75 = 75 <= escgo_length ? nm74 + (1 + 74) * escgo_src[74] : nm74
+dm75 = 75 <= escgo_length ? dm74 + escgo_src[74] : dm74
+nm76 = 76 <= escgo_length ? nm75 + (1 + 75) * escgo_src[75] : nm75
+dm76 = 76 <= escgo_length ? dm75 + escgo_src[75] : dm75
+nm77 = 77 <= escgo_length ? nm76 + (1 + 76) * escgo_src[76] : nm76
+dm77 = 77 <= escgo_length ? dm76 + escgo_src[76] : dm76
+nm78 = 78 <= escgo_length ? nm77 + (1 + 77) * escgo_src[77] : nm77
+dm78 = 78 <= escgo_length ? dm77 + escgo_src[77] : dm77
+nm79 = 79 <= escgo_length ? nm78 + (1 + 78) * escgo_src[78] : nm78
+dm79 = 79 <= escgo_length ? dm78 + escgo_src[78] : dm78
+nm80 = 80 <= escgo_length ? nm79 + (1 + 79) * escgo_src[79] : nm79
+dm80 = 80 <= escgo_length ? dm79 + escgo_src[79] : dm79
+nm81 = 81 <= escgo_length ? nm80 + (1 + 80) * escgo_src[80] : nm80
+dm81 = 81 <= escgo_length ? dm80 + escgo_src[80] : dm80
+nm82 = 82 <= escgo_length ? nm81 + (1 + 81) * escgo_src[81] : nm81
+dm82 = 82 <= escgo_length ? dm81 + escgo_src[81] : dm81
+nm83 = 83 <= escgo_length ? nm82 + (1 + 82) * escgo_src[82] : nm82
+dm83 = 83 <= escgo_length ? dm82 + escgo_src[82] : dm82
+nm84 = 84 <= escgo_length ? nm83 + (1 + 83) * escgo_src[83] : nm83
+dm84 = 84 <= escgo_length ? dm83 + escgo_src[83] : dm83
+nm85 = 85 <= escgo_length ? nm84 + (1 + 84) * escgo_src[84] : nm84
+dm85 = 85 <= escgo_length ? dm84 + escgo_src[84] : dm84
+nm86 = 86 <= escgo_length ? nm85 + (1 + 85) * escgo_src[85] : nm85
+dm86 = 86 <= escgo_length ? dm85 + escgo_src[85] : dm85
+nm87 = 87 <= escgo_length ? nm86 + (1 + 86) * escgo_src[86] : nm86
+dm87 = 87 <= escgo_length ? dm86 + escgo_src[86] : dm86
+nm88 = 88 <= escgo_length ? nm87 + (1 + 87) * escgo_src[87] : nm87
+dm88 = 88 <= escgo_length ? dm87 + escgo_src[87] : dm87
+nm89 = 89 <= escgo_length ? nm88 + (1 + 88) * escgo_src[88] : nm88
+dm89 = 89 <= escgo_length ? dm88 + escgo_src[88] : dm88
+nm90 = 90 <= escgo_length ? nm89 + (1 + 89) * escgo_src[89] : nm89
+dm90 = 90 <= escgo_length ? dm89 + escgo_src[89] : dm89
+nm91 = 91 <= escgo_length ? nm90 + (1 + 90) * escgo_src[90] : nm90
+dm91 = 91 <= escgo_length ? dm90 + escgo_src[90] : dm90
+nm92 = 92 <= escgo_length ? nm91 + (1 + 91) * escgo_src[91] : nm91
+dm92 = 92 <= escgo_length ? dm91 + escgo_src[91] : dm91
+nm93 = 93 <= escgo_length ? nm92 + (1 + 92) * escgo_src[92] : nm92
+dm93 = 93 <= escgo_length ? dm92 + escgo_src[92] : dm92
+nm94 = 94 <= escgo_length ? nm93 + (1 + 93) * escgo_src[93] : nm93
+dm94 = 94 <= escgo_length ? dm93 + escgo_src[93] : dm93
+nm95 = 95 <= escgo_length ? nm94 + (1 + 94) * escgo_src[94] : nm94
+dm95 = 95 <= escgo_length ? dm94 + escgo_src[94] : dm94
+nm96 = 96 <= escgo_length ? nm95 + (1 + 95) * escgo_src[95] : nm95
+dm96 = 96 <= escgo_length ? dm95 + escgo_src[95] : dm95
+nm97 = 97 <= escgo_length ? nm96 + (1 + 96) * escgo_src[96] : nm96
+dm97 = 97 <= escgo_length ? dm96 + escgo_src[96] : dm96
+nm98 = 98 <= escgo_length ? nm97 + (1 + 97) * escgo_src[97] : nm97
+dm98 = 98 <= escgo_length ? dm97 + escgo_src[97] : dm97
+nm99 = 99 <= escgo_length ? nm98 + (1 + 98) * escgo_src[98] : nm98
+dm99 = 99 <= escgo_length ? dm98 + escgo_src[98] : dm98
+nm100 = 100 <= escgo_length ? nm99 + (1 + 99) * escgo_src[99] : nm99
+dm100 = 100 <= escgo_length ? dm99 + escgo_src[99] : dm99
+nm = nm100
+dm = dm100
+cg = dm != 0 ? -nm / dm + (escgo_length + 1) / 2.0 : 0
+maxc = ta.highest(cg, escgo_length)
+minc = ta.lowest(cg, escgo_length)
+v1 = maxc != minc ? (cg - minc) / (maxc - minc) : 0
+v2_ = (4 * v1 + 3 * v1[1] + 2 * v1[2] + v1[3]) / 10.0
+v2 = 2 * (v2_ - 0.5)
+t = 0.96 * (v2[1] + 0.02)
+//duml=plot(fr?(v2>t?v2:t):na, style=circles, linewidth=0, color=gray, title="Dummy")
+//cmil=plot(v2, title="StochCGOsc", color=red)
+//tl=plot(t, title="Trigger",color=green)
+//plot(0, title="ZeroLine", color=gray) 
+u1 = math.abs(lvls)
+l1 = math.abs(lvls) * -1.0
+//plot(u1,title="Level+",color=gray) 
+//plot(l1,title="Level-",color=gray)
+//fill(cmil, duml, color=red, transp=50, title="NegativeFill")
+//fill(tl, duml, color=lime, transp=50, title="PositiveFill")
+//ebc=input(false, title="Color bars?")
+//bc=ebc?(v2>v2[1]?(v2>0?lime:green):v2<v2[1]?(v2>0?orange:red):(v2>u1?lime:v2<l1?red:gray)):na
+//barcolor(bc)
+escgo_long = v2 > v2[1] and v2[1] < v2[2] or v2 > u1 and v2[1] < l1[1]
+escgo_short = v2 < v2[1] and v2[1] > v2[2] or v2 < l1 and v2[1] > u1[1]
+
+// ***********************************************************************************
+//------------------------------------- Alligator & Fractal ----------------------------------------//
+ShowAlligator = input(true, title='Show Alligator')
+
+// === INPUTS ===
+//
+jawLength = 13  //defval=13, "Jaw Length"
+teethLength = 8  //defval=8, "Teeth Length"
+lipsLength = 5  //defval=5, "Lips Length"
+jawOffset = 8  //defval=8, "Jaw Offset"
+teethOffset = 5  //defval=5, "Teeth Offset"
+lipsOffset = 3  //defval=3, "Lips Offset"
+asrc = hl2  //defval=hl2, "Alligator Source"
+
+hideAlligator = true  //defval=false
+showAlligatorState = true  //defval=false
+//
+hidefractals = true  //defval=false
+hidelevels = true  //defval=false
+maxLvlLen = 0  //defval=0
+uFractalRev = input(true, title='Show Williams Fractal Reversal Strategy')  //defval=false, "Use Fractal Reversal Strategy"
+uFractalBO = false  //defval=false, "Use Fractal Break Out Strategy"
+uAwesomeBO = false  //defval=false, "Use Awesome Break Out Strategy"
+nLengthSlow = 34  //defval=34, minval=1, title="Awesome Slow Length"
+nLengthFast = 5  //defval=5, minval=1, title="Awesome Fast Length"
+
+// === FUNCTIONS ===
+
+//  ||---   Completed Fractals Recognition Functions:  -----------------------------------------------------||
+isIdealFractal(mode) =>
+    ret = mode == 1 ? high[4] < high[3] and high[3] < high[2] and high[2] > high[1] and high[1] > high[0] : mode == -1 ? low[4] > low[3] and low[3] > low[2] and low[2] < low[1] and low[1] < low[0] : false
+    ret
+
+isRegularFractal(mode) =>
+    ret = mode == 1 ? high[4] < high[2] and high[3] <= high[2] and high[2] > high[1] and high[2] > high[0] : mode == -1 ? low[4] > low[2] and low[3] >= low[2] and low[2] < low[1] and low[2] < low[0] : false
+    ret
+
+//  ||-----------------------------------------------------------------------------------------------------||
+
+//
+// SMMA function to Calculate Alligaor Trend Lines
+//
+smma(src, length) =>
+    s = 0.0
+    sma_1 = request.security(syminfo.tickerid, '60', ta.sma(src, length))
+    s := na(s[1]) ? sma_1 : (s[1] * (length - 1) + src) / length
+    s
+
+// === /FUNCIONS ===
+
+// === SERIES ===
+
+// Calculate Offsetted Alligator curves
+jaw_ = smma(asrc, jawLength)
+teeth_ = smma(asrc, teethLength)
+lips_ = smma(asrc, lipsLength)
+
+// Re-allign Alligator to current price action.
+jaw = jaw_[jawOffset]
+teeth = teeth_[teethOffset]
+lips = lips_[lipsOffset]
+
+// Fractals.
+topfractal = isRegularFractal(1)
+botfractal = isRegularFractal(-1)
+
+//Count How many candles for current Pivot Level, If new reset.
+topcnt = 0
+botcnt = 0
+topcnt := topfractal ? 0 : nz(topcnt[1]) + 1
+botcnt := botfractal ? 0 : nz(botcnt[1]) + 1
+
+topfractals = 0.0
+botfractals = 0.0
+topfractals := topfractal ? high[2] : topfractals[1]
+botfractals := botfractal ? low[2] : botfractals[1]
+
+topfc = topfractals != topfractals[1] ? na : color.green
+botfc = botfractals != botfractals[1] ? na : color.red
+
+// Alligator trend States down(<0), up(>0), considation(0) conditions.
+// 1 = lips above teeth above jaw in order, 2 = lips above teeth and jaw, 3 = lips above teeth.
+//
+AlligatorState = lips < teeth and teeth < jaw ? -1 : lips > teeth and teeth > jaw ? 1 : lips < teeth and lips < jaw ? -2 : lips > teeth and lips > jaw ? 2 : lips < teeth ? -3 : lips > teeth ? 3 : 0
+
+//
+// Fractal Reversal Signal
+//
+highRev = 0
+lowRev = 0
+highRev := AlligatorState <= 0 ? 0 : AlligatorState == 1 ? AlligatorState[2] > 0 and botfractal and low[2] > teeth[2] ? nz(highRev[1]) + 1 : highRev[1] > 0 ? highRev[1] + 1 : 0 : 0
+lowRev := AlligatorState >= 0 ? 0 : AlligatorState == -1 ? AlligatorState[2] < 0 and topfractal and high[2] < teeth[2] ? nz(lowRev[1]) + 1 : lowRev[1] > 0 ? lowRev[1] + 1 : 0 : 0
+
+// Show Fractal Reversal alert Arrows
+plotarrow(uFractalRev ? highRev == 1 ? 1 : lowRev == 1 ? -1 : na : na, title='Fractal Reversal Arrow', colorup=color.new(color.lime, 20), colordown=color.new(color.red, 20), offset=0, minheight=40, maxheight=60, editable=false)
+
+// show Alligator Trend Direction State.
+//plotshape(ShowAlligator ? true : na, title="Alligator Trend Direction", location=location.bottom, style=shape.square, color=AlligatorState == 1 ? color.green : AlligatorState == -1 ? color.red : color.yellow, transp=10)
+
+// ***********************************************************************************
+//------------------------------------- Divergences ----------------------------------------//
+ShowDivergs = input(true, title='Show Divergences')
+
+
+lb = 5  //defval=5, title="Left Bars", minval=1
+rb = 5  //defval=5, title="Right Bars", minval=1
+showhidden = input(false, title='Show Hidden Divergences')
+chcut = true  //defval=false, title = "Check Cut-Through in indicators !"
+shownum = true  //defval=true, title="Show Divergence Number"
+showindis = true  //defval=false, title="Show Indicator Names"
+showpivot = false  //defval=false, title="Show Pivot Points"
+chwidth = true  //defval=true, title = "Change Width by Number of Divergence"
+showlimit = 1  //defval=1, title="Minimum Number of Divergence", minval = 1, maxval = 11
+calcmacd = true  //defval=true, title="MACD"
+calcmacda = true  //defval=true, title="MACD Histogram"
+calcrsi = true  //defval=true, title="RSI"
+calcstoc = true  //defval=true, title="Stochastic"
+calccci = true  //defval=true, title="CCI"
+calcmom = true  //defval=true, title="Momentum"
+calcobv = true  //defval=true, title="OBV"
+calcdi = true  //defval=true, title="Diosc"
+calcvwmacd = true  //defval=true, title="VWmacd"
+calccmf = true  //defval=true, title="Chaikin Money Flow"
+calcmfi = true  //defval=true, title="Money Flow Index"
+
+// RSI
+rsi = ta.rsi(close, 14)
+// MACD
+[macd, signal, deltamacd] = ta.macd(close, 12, 26, 9)
+// Momentum
+moment = ta.mom(close, 10)
+// CCI
+cci = ta.cci(close, 10)
+// OBV
+
+Obv = ta.obv  // cum(change(close) > 0 ? volume : change(close) < 0 ? -volume : 0 * volume)
+// Stoch
+stk = ta.sma(ta.stoch(close, high, low, 14), 3)
+// DIOSC
+DI = ta.change(high) - -ta.change(low)
+trur = ta.rma(ta.tr, 14)
+diosc = fixnan(100 * ta.rma(DI, 14) / trur)
+// volume weighted macd
+maFast = ta.vwma(close, 12)
+maSlow = ta.vwma(close, 26)
+vwmacd = maFast - maSlow
+// Chaikin money flow
+Cmfm = (close - low - (high - close)) / (high - low)
+Cmfv = Cmfm * volume
+cmf = ta.sma(Cmfv, 21) / ta.sma(volume, 21)
+// Moneyt Flow Index
+Mfi = ta.mfi(close, 14)
+
+float top = na
+float bot = na
+top := ta.pivothigh(lb, rb)
+bot := ta.pivotlow(lb, rb)
+
+plotshape(top and showpivot, text='[PH]', style=shape.labeldown, color=color.new(color.white, 0), textcolor=color.new(color.black, 0), location=location.abovebar, offset=-rb, editable=false)
+plotshape(bot and showpivot, text='[PL]', style=shape.labeldown, color=color.new(color.white, 0), textcolor=color.new(color.black, 0), location=location.belowbar, offset=-rb, editable=false)
+
+topc = 0
+botc = 0
+topc := top ? lb : nz(topc[1]) + 1
+botc := bot ? lb : nz(botc[1]) + 1
+
+// Negative Divergence or Hidden Positive  Divergence
+newtop = ta.pivothigh(lb, 0)  // check only left side
+emptyh = true
+if not na(newtop) and (newtop > high[topc] and not showhidden or newtop < high[topc] and showhidden)  // there must not close price higher than the line between last PH and current high
+    diff = (newtop - high[topc]) / topc
+    hline = newtop - diff  // virtual line to check there is no close price higher than it
+    for x = 1 to topc - 1 by 1
+        if close[x] > hline
+            emptyh := false
+            break
+        hline -= diff
+        hline
+else
+    emptyh := false
+    emptyh
+
+// check cut-through in indicators
+nocut1(indi, len) =>
+    _ret = true
+    diff = (indi - nz(indi[len])) / len
+    ln = indi - diff
+    for x = 1 to len - 1 by 1
+        if nz(indi[x]) > ln
+            _ret := false
+            break
+        ln -= diff
+        ln
+    _ret
+
+rsiok = nocut1(rsi, topc)
+macdok = nocut1(macd, topc)
+deltamacdok = nocut1(deltamacd, topc)
+momentok = nocut1(moment, topc)
+cciok = nocut1(cci, topc)
+obvok = nocut1(ta.obv, topc)
+stkok = nocut1(stk, topc)
+dioscok = nocut1(diosc, topc)
+vwmacdok = nocut1(vwmacd, topc)
+cmfok = nocut1(cmf, topc)
+mfiok = nocut1(Mfi, topc)
+
+negdivergence = 0
+negdivtxt = ''
+if emptyh and not na(newtop) and not showhidden and ShowDivergs
+    if calcrsi and rsi[topc] > rsi and (not chcut or rsiok)
+        negdivergence += 1
+        negdivtxt := 'RSI\n'
+        negdivtxt
+    if calcmacd and macd[topc] > macd and (not chcut or macdok)
+        negdivergence += 1
+        negdivtxt += 'MACD\n'
+        negdivtxt
+    if calcmacda and deltamacd[topc] > deltamacd and (not chcut or deltamacdok)
+        negdivergence += 1
+        negdivtxt += 'MACD Hist\n'
+        negdivtxt
+    if calcmom and moment[topc] > moment and (not chcut or momentok)
+        negdivergence += 1
+        negdivtxt += 'Momentum\n'
+        negdivtxt
+    if calccci and cci[topc] > cci and (not chcut or cciok)
+        negdivergence += 1
+        negdivtxt += 'CCI\n'
+        negdivtxt
+    if calcobv and Obv[topc] > Obv and (not chcut or obvok)
+        negdivergence += 1
+        negdivtxt += 'OBV\n'
+        negdivtxt
+    if calcstoc and stk[topc] > stk and (not chcut or stkok)
+        negdivergence += 1
+        negdivtxt += 'Stoch\n'
+        negdivtxt
+    if calcdi and diosc[topc] > diosc and (not chcut or dioscok)
+        negdivergence += 1
+        negdivtxt += 'Diosc\n'
+        negdivtxt
+    if calcvwmacd and vwmacd[topc] > vwmacd and (not chcut or vwmacdok)
+        negdivergence += 1
+        negdivtxt += 'VWMacd\n'
+        negdivtxt
+    if calccmf and cmf[topc] > cmf and (not chcut or cmfok)
+        negdivergence += 1
+        negdivtxt += 'CMF\n'
+        negdivtxt
+    if calcmfi and Mfi[topc] > Mfi and (not chcut or mfiok)
+        negdivergence += 1
+        negdivtxt += 'MFI\n'
+        negdivtxt
+
+// Hidden divergence
+hposdivergence = 0
+hposdivtxt = ''
+if emptyh and not na(newtop) and showhidden and ShowDivergs
+    if calcrsi and rsi[topc] < rsi and (not chcut or rsiok)
+        hposdivergence += 1
+        hposdivtxt := 'RSI\n'
+        hposdivtxt
+    if calcmacd and macd[topc] < macd and (not chcut or macdok)
+        hposdivergence += 1
+        hposdivtxt += 'MACD\n'
+        hposdivtxt
+    if calcmacda and deltamacd[topc] < deltamacd and (not chcut or deltamacdok)
+        hposdivergence += 1
+        hposdivtxt += 'MACD Hist\n'
+        hposdivtxt
+    if calcmom and moment[topc] < moment and (not chcut or momentok)
+        hposdivergence += 1
+        hposdivtxt += 'Momentum\n'
+        hposdivtxt
+    if calccci and cci[topc] < cci and (not chcut or cciok)
+        hposdivergence += 1
+        hposdivtxt += 'CCI\n'
+        hposdivtxt
+    if calcobv and Obv[topc] < Obv and (not chcut or obvok)
+        hposdivergence += 1
+        hposdivtxt += 'OBV\n'
+        hposdivtxt
+    if calcstoc and stk[topc] < stk and (not chcut or stkok)
+        hposdivergence += 1
+        hposdivtxt += 'Stoch\n'
+        hposdivtxt
+    if calcdi and diosc[topc] < diosc and (not chcut or dioscok)
+        hposdivergence += 1
+        hposdivtxt += 'Diosc\n'
+        hposdivtxt
+    if calcvwmacd and vwmacd[topc] < vwmacd and (not chcut or vwmacdok)
+        hposdivergence += 1
+        hposdivtxt += 'VWMacd\n'
+        hposdivtxt
+    if calccmf and cmf[topc] < cmf and (not chcut or cmfok)
+        hposdivergence += 1
+        hposdivtxt += 'CMF\n'
+        hposdivtxt
+    if calcmfi and Mfi[topc] < Mfi and (not chcut or mfiok)
+        hposdivergence += 1
+        hposdivtxt += 'MFI\n'
+        hposdivtxt
+
+newareah = false
+newareah := top ? false : nz(newareah[1], false)
+if negdivergence >= showlimit or hposdivergence >= showlimit
+    var line divlh = na
+    var label labh = na
+    if newareah  // we remove old line until It reaches new pivot point (like animation ;)
+        line.delete(divlh)
+        label.delete(labh)
+    newwd = not showhidden ? not chwidth ? 2 : negdivergence <= 2 ? 2 : negdivergence <= 5 ? 3 : negdivergence <= 8 ? 4 : 5 : not chwidth ? 2 : hposdivergence <= 2 ? 2 : hposdivergence <= 5 ? 3 : hposdivergence <= 8 ? 4 : 5
+
+    divlh := line.new(bar_index - topc, high[topc], bar_index, high, color=color.maroon, width=newwd)
+    if shownum or showindis
+        txt = showindis ? showhidden ? hposdivtxt : negdivtxt : ''
+        txt += (shownum ? showhidden ? str.tostring(hposdivergence) : str.tostring(negdivergence) : '')
+        labh := label.new(bar_index, na, text=txt, color=showhidden ? color.lime : color.maroon, textcolor=showhidden ? color.black : color.white, style=showhidden ? label.style_label_up : label.style_label_down, yloc=yloc.abovebar)
+        labh
+    newareah := true
+    newareah
+
+// Positive or Hidden Negative Divergence
+newbot = ta.pivotlow(lb, 0)  // check only left side
+emptyl = true
+if not na(newbot) and (newbot < low[botc] and not showhidden or newbot > low[botc] and showhidden)  // there must not close price lower than the line between last PL and current low
+    diff = (newbot - low[botc]) / botc
+    lline = newbot - diff  // virtual line to check there is no close price lower than it
+    for x = 1 to botc - 1 by 1
+        if close[x] < lline
+            emptyl := false
+            break
+        lline -= diff
+        lline
+else
+    emptyl := false
+    emptyl
+
+// check cut-through in indicators
+nocut2(indi, len) =>
+    _ret = true
+    diff = (indi - nz(indi[len])) / len
+    ln = indi - diff
+    for x = 1 to len - 1 by 1
+        if nz(indi[x]) < ln
+            _ret := false
+            break
+        ln -= diff
+        ln
+    _ret
+
+rsiok := nocut2(rsi, botc)
+macdok := nocut2(macd, botc)
+deltamacdok := nocut2(deltamacd, botc)
+momentok := nocut2(moment, botc)
+cciok := nocut2(cci, botc)
+obvok := nocut2(ta.obv, botc)
+stkok := nocut2(stk, botc)
+dioscok := nocut2(diosc, botc)
+vwmacdok := nocut2(vwmacd, botc)
+cmfok := nocut2(cmf, botc)
+mfiok := nocut2(Mfi, botc)
+
+posdivergence = 0
+posdivtxt = ''
+if emptyl and not na(newbot) and not showhidden and ShowDivergs
+    if calcrsi and rsi[botc] < rsi and (not chcut or rsiok)
+        posdivergence := 1
+        posdivtxt := 'RSI\n'
+        posdivtxt
+    if calcmacd and macd[botc] < macd and (not chcut or macdok)
+        posdivergence += 1
+        posdivtxt += 'MACD\n'
+        posdivtxt
+    if calcmacda and deltamacd[botc] < deltamacd and (not chcut or deltamacdok)
+        posdivergence += 1
+        posdivtxt += 'MACD Hist\n'
+        posdivtxt
+    if calcmom and moment[botc] < moment and (not chcut or momentok)
+        posdivergence += 1
+        posdivtxt += 'Momentum\n'
+        posdivtxt
+    if calccci and cci[botc] < cci and (not chcut or cciok)
+        posdivergence += 1
+        posdivtxt += 'CCI\n'
+        posdivtxt
+    if calcobv and Obv[botc] < Obv and (not chcut or obvok)
+        posdivergence += 1
+        posdivtxt += 'OBV\n'
+        posdivtxt
+    if calcstoc and stk[botc] < stk and (not chcut or stkok)
+        posdivergence += 1
+        posdivtxt += 'Stoch\n'
+        posdivtxt
+    if calcdi and diosc[botc] < diosc and (not chcut or dioscok)
+        posdivergence += 1
+        posdivtxt += 'Diosc\n'
+        posdivtxt
+    if calcvwmacd and vwmacd[botc] < vwmacd and (not chcut or vwmacdok)
+        posdivergence += 1
+        posdivtxt += 'VWMacd\n'
+        posdivtxt
+    if calccmf and cmf[botc] < cmf and (not chcut or cmfok)
+        posdivergence += 1
+        posdivtxt += 'CMF\n'
+        posdivtxt
+    if calcmfi and Mfi[botc] < Mfi and (not chcut or mfiok)
+        posdivergence += 1
+        posdivtxt += 'MFI\n'
+        posdivtxt
+
+// Hidden Divergences
+hnegdivergence = 0
+hnegdivtxt = ''
+if emptyl and not na(newbot) and showhidden and ShowDivergs
+    if calcrsi and rsi[botc] > rsi and (not chcut or rsiok)
+        hnegdivergence := 1
+        hnegdivtxt := 'RSI\n'
+        hnegdivtxt
+    if calcmacd and macd[botc] > macd and (not chcut or macdok)
+        hnegdivergence += 1
+        hnegdivtxt += 'MACD\n'
+        hnegdivtxt
+    if calcmacda and deltamacd[botc] < deltamacd and (not chcut or deltamacdok)
+        hnegdivergence += 1
+        hnegdivtxt += 'MACD Hist\n'
+        hnegdivtxt
+    if calcmom and moment[botc] > moment and (not chcut or momentok)
+        hnegdivergence += 1
+        hnegdivtxt += 'Momentum\n'
+        hnegdivtxt
+    if calccci and cci[botc] > cci and (not chcut or cciok)
+        hnegdivergence += 1
+        hnegdivtxt += 'CCI\n'
+        hnegdivtxt
+    if calcobv and Obv[botc] > Obv and (not chcut or obvok)
+        hnegdivergence += 1
+        hnegdivtxt += 'OBV\n'
+        hnegdivtxt
+    if calcstoc and stk[botc] > stk and (not chcut or stkok)
+        hnegdivergence += 1
+        hnegdivtxt += 'Stoch\n'
+        hnegdivtxt
+    if calcdi and diosc[botc] > diosc and (not chcut or dioscok)
+        hnegdivergence += 1
+        hnegdivtxt += 'Diosc\n'
+        hnegdivtxt
+    if calcvwmacd and vwmacd[botc] > vwmacd and (not chcut or vwmacdok)
+        hnegdivergence += 1
+        hnegdivtxt += 'VWMacd\n'
+        hnegdivtxt
+    if calccmf and cmf[botc] > cmf and (not chcut or cmfok)
+        hnegdivergence += 1
+        hnegdivtxt += 'CMF\n'
+        hnegdivtxt
+    if calcmfi and Mfi[botc] > Mfi and (not chcut or mfiok)
+        hnegdivergence += 1
+        hnegdivtxt += 'MFI\n'
+        hnegdivtxt
+
+newareal = false
+newareal := bot ? false : nz(newareal[1], false)
+if posdivergence >= showlimit or hnegdivergence >= showlimit
+    var line divl = na
+    var label lab = na
+    if newareal  // we remove old line until It reaches new pivot point (like animation ;)
+        line.delete(divl)
+        label.delete(lab)
+    newwd = not showhidden ? not chwidth ? 2 : posdivergence <= 2 ? 2 : posdivergence <= 5 ? 3 : posdivergence <= 8 ? 4 : 5 : not chwidth ? 2 : hnegdivergence <= 2 ? 2 : hnegdivergence <= 5 ? 3 : hnegdivergence <= 8 ? 4 : 5
+
+    divl := line.new(bar_index - botc, low[botc], bar_index, low, color=color.lime, width=newwd)
+    if shownum or showindis
+        txt = showindis ? showhidden ? hnegdivtxt : posdivtxt : ''
+        txt += (shownum ? showhidden ? str.tostring(hnegdivergence) : str.tostring(posdivergence) : '')
+        lab := label.new(bar_index, na, text=txt, color=showhidden ? color.olive : color.lime, textcolor=showhidden ? color.white : color.black, style=showhidden ? label.style_label_down : label.style_label_up, yloc=yloc.belowbar)
+        lab
+    newareal := true
+    newareal
+
+
+// ***********************************************************************************
+//------------------------------------- RSI ----------------------------------------//
+
+ShowRSI = input(true, title='Show RSI')
+RsiValue14 = ta.rsi(close, 14)
+//OB = 90
+//OS = 10
+
+// ***********************************************************************************
+//------------------------- Adaptive ATR-ADX Trend -----------------------------//
+
+ShowATR_ADX = input(true, title='Show Adaptive ATR-ADX Trend')
+
+//Mode
+atrLen = 14  //"ATR", minval = 1, maxval = 100
+m1 = 3.5  //"ATR Multiplier - ADX Rising", minval = 1, step = 0.1, maxval = 100
+m2 = 1.75  //"ATR Multiplier - ADX Falling", minval = 1, step = 0.1, maxval = 100
+dintval = '240'  //"Inverval (i.e. 15, 60, 240, D, W)
+useIntval = false  //"Use Chart Interval"
+
+bandHalfWidth = 1  //1, "Band Pip/Tick Size Around Stop", minval = 0
+showBand = false  //"Use Band Around Stop?"
+
+adxLen = 14  //"ADX", defval = 14, minval = 1, maxval = 100
+adxThresh = 25  //"ADX Threshold", defval = 25, minval = 1
+aboveThresh = true  //"ADX Above Threshold uses ATR Falling Multiplier Even if Rising?"
+useHeikin = true  //"Use Heikin-Ashi Bars (Source will be ohlc4)"
+
+src = ohlc4
+
+tk = syminfo.mintick
+blockMult = tk < 0.1 and (tk != 0.01 or syminfo.pointvalue < 10 or syminfo.pointvalue * tk <= 1) and (tk != 0.001 or syminfo.pointvalue <= 1) and tk != 0.005 and tk != 0.0001 and tk != 0.0005 and tk != 0.03125 and tk != 0.015625 ? tk == 0.00005 or tk * 100 == 0.00005 ? 2 : 10 : 1
+block = tk * blockMult
+
+atrCalc() =>
+    // DI-Pos, DI-Neg, ADX
+
+    hR = ta.change(high)
+    lR = -ta.change(low)
+
+    dmPos = hR > lR ? math.max(hR, 0) : 0
+    dmNeg = lR > hR ? math.max(lR, 0) : 0
+
+    sTR = ta.tr
+    sTR := nz(sTR[1]) - nz(sTR[1]) / adxLen + ta.tr
+    sDMPos = ta.tr
+    sDMPos := nz(sDMPos[1]) - nz(sDMPos[1]) / adxLen + dmPos
+    sDMNeg = ta.tr
+    sDMNeg := nz(sDMNeg[1]) - nz(sDMNeg[1]) / adxLen + dmNeg
+
+    DIP = sDMPos / sTR * 100
+    DIN = sDMNeg / sTR * 100
+    DX = math.abs(DIP - DIN) / (DIP + DIN) * 100
+    adx = ta.sma(DX, adxLen)
+
+    // Heikin-Ashi
+
+    xClose = ohlc4
+    xOpen = open
+    xOpen := (nz(xOpen[1]) + nz(xClose[1])) / 2
+    xHigh = math.max(high, math.max(xOpen, xClose))
+    xLow = math.min(low, math.min(xOpen, xClose))
+
+    // Trailing ATR
+
+    v1 = math.abs(xHigh - xClose[1])
+    v2 = math.abs(xLow - xClose[1])
+    v3 = xHigh - xLow
+
+    trueRange = math.max(v1, math.max(v2, v3))
+    rma_1 = ta.rma(trueRange, atrLen)
+    atr_1 = ta.atr(atrLen)
+    atr = useHeikin ? rma_1 : atr_1
+
+    m = m1
+    falling_1 = ta.falling(adx, 1)
+    m := ta.rising(adx, 1) and (adx < adxThresh or not aboveThresh) ? m1 : falling_1 or adx > adxThresh and aboveThresh ? m2 : nz(m[1])
+    mUp = DIP >= DIN ? m : m2
+    mDn = DIN >= DIP ? m : m2
+
+    src_ = useHeikin ? (xOpen + xHigh + xLow + xClose) / 4 : src
+    c = useHeikin ? xClose : close
+    t = useHeikin ? (xHigh + xLow) / 2 : hl2
+
+    up = t - mUp * atr
+    dn = t + mDn * atr
+
+    TUp = close
+    TUp := math.max(src_[1], math.max(c[1], close[1])) > TUp[1] ? math.max(up, TUp[1]) : up
+    TDown = close
+    TDown := math.min(src_[1], math.min(c[1], close[1])) < TDown[1] ? math.min(dn, TDown[1]) : dn
+
+    trend = 1
+    trend := math.min(src_, math.min(c, close)) > TDown[1] ? 1 : math.max(src_, math.max(c, close)) < TUp[1] ? -1 : nz(trend[1], 1)
+
+    // ceil positive trend to nearest pip/tick, floor negative trend to nearest pip/tick
+    stop = trend == 1 ? math.ceil(TUp / block) * block : math.floor(TDown / block) * block
+    trendChange = ta.change(trend)
+
+    [adx, trend, stop, trendChange]
+
+[adx, _trend, _stop, _trendChange] = atrCalc()
+
+start = request.security(syminfo.tickerid, dintval, time, lookahead=barmerge.lookahead_on)
+change_1 = ta.change(start)
+newSession = change_1 ? 1 : 0
+sinceNew = ta.barssince(newSession)
+
+// Fixes intervals that are uneven, i.e. 120 on normal 6.5 hour NYSE day
+// This will happen if a 2H interval closes at 4:00 EST but opened at 3:30
+// EST. This is a new session candle. The 9:30 open the next day will also
+// be a new session candle, which shouldn't happen. There should never be
+// 2 consecutive candles that are new session candles, unless the indicator
+// interval is less than or equal to the chart interval. If there are 3
+// consecutive candles where each candle is a new session, then the chart
+// interval is <= the declared indicator interval.
+isChartIntval = sinceNew == 0 and sinceNew[1] == 0 and sinceNew[2] == 0
+
+security_1 = request.security(syminfo.tickerid, dintval, _trend[1], lookahead=barmerge.lookahead_on)
+trend = useIntval or isChartIntval ? _trend : security_1
+security_2 = request.security(syminfo.tickerid, dintval, _stop[1], lookahead=barmerge.lookahead_on)
+stop = useIntval or isChartIntval ? _stop : security_2
+security_3 = request.security(syminfo.tickerid, dintval, _trendChange[1], lookahead=barmerge.lookahead_on)
+trendChange = useIntval or isChartIntval ? _trendChange : security_3
+
+// Plot
+
+upC = #00FF00DD
+dnC = #FF0000DD
+upC2 = #00FF0037
+dnC2 = #FF000037
+trans = #00000000
+
+lineColor = not trendChange or trendChange[1] ? trend > 0 ? upC : dnC : trans
+fillColor = not trendChange or trendChange[1] ? trend > 0 ? upC2 : dnC2 : trans
+
+// Can't figure out any other way to solve this issue for fixing a problem where
+// the indicator interval is greater than the chart interval, and the indicator is
+// not divisible by the chart interval without a remainder.
+oddIntervalTest = lineColor[1] == upC and lineColor[0] == dnC or lineColor[1] == dnC and lineColor[0] == upC
+stopColor = oddIntervalTest ? trans : lineColor
+trendChangeReal = stopColor == trans
+shapeColor = trendChangeReal ? trend > 0 ? #00FF00F8 : #FF0000F8 : trans
+
+upperBand = stop + bandHalfWidth * block
+lowerBand = stop - bandHalfWidth * block
+
+stopPlot = plot(ShowATR_ADX ? stop : na, color=stopColor, title='ATR-ADX Trend', style=plot.style_circles, linewidth=3, editable=false)
+//upper = plot(showBand ? upperBand : na, color=oddIntervalTest ? trans : lineColor, style=plot.style_circles)
+//lower = plot(showBand ? lowerBand : na, color=oddIntervalTest ? trans : lineColor, style=plot.style_circles)
+
+//fill(upper, stopPlot, title="ATR Band Fill - Upper", color=fillColor)
+//fill(lower, stopPlot, title="ATR Band Fill - Lower", color=fillColor)
+
+plotshape(ShowATR_ADX and trendChangeReal ? stop : na, style=shape.xcross, size=size.normal, location=location.absolute, color=shapeColor, title='Trend Change', editable=false)
+
+// ***********************************************************************************
+//------------------------- ZEMAs Crosses -----------------------------//
+
+ShowEMA_30_Crosses = input(true, title='Show 30m ZEMAs Crosses')
+ShowEMA_4_Crosses = input(true, title='Show 4h ZEMAs Crosses')
+ShowEMA_d_Crosses = input(true, title='Show Daily ZEMAs Crosses')
+ShowEMA_1348_Crosses = input(true, title='Show 30m 13|48 ZEMAs Crosses')
+
+//ZEMA-50 in 30 minutes timeframe 
+temp_EMA_50_30_1 = request.security(syminfo.tickerid, '30', ta.ema(close, 50))
+temp_EMA_50_30_2 = request.security(syminfo.tickerid, '30', ta.ema(temp_EMA_50_30_1, 50))
+Difference_50_30 = temp_EMA_50_30_1 - temp_EMA_50_30_2
+ZEMA_50_30 = temp_EMA_50_30_1 + Difference_50_30
+
+//ZEMA-200 in 30 minutes timeframe 
+temp_EMA_200_30_1 = request.security(syminfo.tickerid, '30', ta.ema(close, 200))
+temp_EMA_200_30_2 = request.security(syminfo.tickerid, '30', ta.ema(temp_EMA_200_30_1, 200))
+Difference_200_30 = temp_EMA_200_30_1 - temp_EMA_200_30_2
+ZEMA_200_30 = temp_EMA_200_30_1 + Difference_200_30
+
+//ZEMA-50 in 4 hours timeframe 
+temp_EMA_50_4_1 = request.security(syminfo.tickerid, '240', ta.ema(close, 50))
+temp_EMA_50_4_2 = request.security(syminfo.tickerid, '240', ta.ema(temp_EMA_50_4_1, 50))
+Difference_50_4 = temp_EMA_50_4_1 - temp_EMA_50_4_2
+ZEMA_50_4 = temp_EMA_50_4_1 + Difference_50_4
+
+//ZEMA-200 in 4 hours timeframe 
+temp_EMA_200_4_1 = request.security(syminfo.tickerid, '240', ta.ema(close, 200))
+temp_EMA_200_4_2 = request.security(syminfo.tickerid, '240', ta.ema(temp_EMA_200_4_1, 200))
+Difference_200_4 = temp_EMA_200_4_1 - temp_EMA_200_4_2
+ZEMA_200_4 = temp_EMA_200_4_1 + Difference_200_4
+
+//ZEMA-50 in daily timeframe 
+temp_EMA_50_d_1 = request.security(syminfo.tickerid, 'D', ta.ema(close, 50))
+temp_EMA_50_d_2 = request.security(syminfo.tickerid, 'D', ta.ema(temp_EMA_50_d_1, 50))
+Difference_50_d = temp_EMA_50_d_1 - temp_EMA_50_d_2
+ZEMA_50_d = temp_EMA_50_d_1 + Difference_50_d
+
+//ZEMA-200 in daily timeframe 
+temp_EMA_200_d_1 = request.security(syminfo.tickerid, 'D', ta.ema(close, 200))
+temp_EMA_200_d_2 = request.security(syminfo.tickerid, 'D', ta.ema(temp_EMA_200_d_1, 200))
+Difference_200_d = temp_EMA_200_d_1 - temp_EMA_200_d_2
+ZEMA_200_d = temp_EMA_200_d_1 + Difference_200_d
+
+//ZEMA-13 in 30m timeframe 
+temp_EMA_13_30_1 = request.security(syminfo.tickerid, '30', ta.ema(close, 13))
+temp_EMA_13_30_2 = request.security(syminfo.tickerid, '30', ta.ema(temp_EMA_13_30_1, 13))
+Difference_13_30 = temp_EMA_13_30_1 - temp_EMA_13_30_2
+ZEMA_13_30 = temp_EMA_13_30_1 + Difference_13_30
+
+//ZEMA-48 in 30m timeframe 
+temp_EMA_48_30_1 = request.security(syminfo.tickerid, '30', ta.ema(close, 48))
+temp_EMA_48_30_2 = request.security(syminfo.tickerid, '30', ta.ema(temp_EMA_48_30_1, 48))
+Difference_48_30 = temp_EMA_48_30_1 - temp_EMA_48_30_2
+ZEMA_48_30 = temp_EMA_48_30_1 + Difference_48_30
+
+// ***********************************************************************************
+//-------------------------------- EMA & ZEMA 200 ----------------------------------//
+ShowEMA_ZEMA = input(false, title='Show 200 EMA & ZEMA lines')
+
+plot(ShowEMA_ZEMA ? ZEMA_200_30 : na, color=color.new(color.black, 0), linewidth=4, title='ZEMA 200', editable=false)
+plot(ShowEMA_ZEMA ? ta.ema(close, 200) : na, color=color.new(#ff006e, 0), linewidth=4, title='EMA 200', editable=false)
+
+// ***********************************************************************************
+//------------------------- Linear Regression -----------------------------//
+
+LinRegSource = close
+length = 100
+offset = 0
+LinRegDev = 2.0  //Deviation
+smoothing = 1
+mtf_val = ''  //Resolution
+line_thick = 4  //S&R Thickness
+signals = 'All'  //"Signals Display", options=["Recent", "All"]
+goto = 0  //"End At Bar Index"
+
+data(x) =>
+    ta.sma(request.security(syminfo.tickerid, mtf_val != '' ? mtf_val : timeframe.period, x), smoothing)
+
+linreg = data(ta.linreg(LinRegSource, length, offset))
+linreg_p = data(ta.linreg(LinRegSource, length, offset + 1))
+//plot(linreg, "Regression Line", linreg>linreg[1]?color.green:color.red, editable=false)
+
+x = bar_index
+slope = linreg - linreg_p
+intercept = linreg - x * slope
+deviationSum = 0.0
+for i = 0 to length - 1 by 1
+    deviationSum += math.pow(LinRegSource[i] - (slope * (x - i) + intercept), 2)
+    deviationSum
+deviation = math.sqrt(deviationSum / length)
+x1 = x - length
+x2 = x
+y1 = slope * (x - length) + intercept
+y2 = linreg
+
+updating = goto <= 0 or x < goto
+
+if updating
+    line b = line.new(x1, y1, x2, y2, xloc.bar_index, extend.right, color.black, width=3)  //middle line
+    line.set_style(id=b, style=line.style_dashed)
+    line.delete(b[1])
+    line dp = line.new(x1, deviation * LinRegDev + y1, x2, deviation * LinRegDev + y2, xloc.bar_index, extend.right, color.red, width=3)  //Top line
+    line.set_style(id=dp, style=line.style_dashed)
+    line.delete(dp[1])
+    line dm = line.new(x1, -deviation * LinRegDev + y1, x2, -deviation * LinRegDev + y2, xloc.bar_index, extend.right, color.green, width=3)  //Bottom line
+    line.set_style(id=dm, style=line.style_dashed)
+    line.delete(dm[1])
+
+dm_current = -deviation * LinRegDev + y2
+dp_current = deviation * LinRegDev + y2
+buy = ta.crossunder(close, dm_current)
+sell = ta.crossover(close, dp_current)
+
+//plotshape(buy, "LinReg OS", shape.labelup, location.belowbar, color=#007f5f, text='LinReg OS', textcolor=color.white, show_last=signals=="All"?99999999:length, editable=false)
+//plotshape(sell, "LinReg OB", shape.labeldown, location.abovebar, color=#d62828, text='LinReg OB', textcolor=color.white, show_last=signals=="All"?99999999:length, editable=false)
+
+plot(x, 'Bar Index', color.new(color.aqua, 0), line_thick, plot.style_cross, display=display.none, editable=false)
+
+// ***********************************************************************************
+//------------------------- Ichimoku -----------------------------//
+ShowIchiKumo = input(true, title='Show Kumo Cloud & Chikou Span')
+ShowTenkanKijun = input(false, title='Show Tenkan Sen & Kijun Sen Lines')
+ShowTenkanKijunLables = input(true, title='Show Tenkan|Kijun Cx Labels')
+
+middleDonchian(Length) =>
+    lower = ta.lowest(Length)
+    upper = ta.highest(Length)
+    math.avg(upper, lower)
+
+conversionPeriods = 20  //deval=9
+basePeriods = 60  //defval=26
+laggingSpan2Periods = 120  //defval=52
+displacement = 30  //defval=26
+
+Tenkan = middleDonchian(conversionPeriods)
+Kijun = middleDonchian(basePeriods)
+xChikou = close
+SenkouA = middleDonchian(laggingSpan2Periods)
+SenkouB = (Tenkan[basePeriods] + Kijun[basePeriods]) / 2
+plot(ShowTenkanKijun ? Tenkan : na, color=color.new(color.green, 0), linewidth=3, title='Tenkan', editable=false)
+plot(ShowTenkanKijun ? Kijun : na, color=color.new(color.red, 0), linewidth=3, title='Kijun', editable=false)
+plot(ShowIchiKumo ? xChikou : na, color=color.new(#ab47bc, 0), linewidth=3, title='Chikou', offset=-displacement, editable=false)
+A = plot(ShowIchiKumo ? SenkouA[displacement] : na, color=color.new(color.green, 0), title='SenkouA', editable=false)
+B = plot(ShowIchiKumo ? SenkouB : na, color=color.new(color.red, 0), title='SenkouB', editable=false)
+KumoCloudColor = SenkouA[displacement] > SenkouB ? color.green : color.red
+KumoCloudFill = ShowIchiKumo ? 90 : 0
+fill(A, B, KumoCloudColor, editable=false, transp=KumoCloudFill)
+
+green_cloud = SenkouA[displacement] > SenkouB
+red_cloud = SenkouA[displacement] < SenkouB
+
+below_cloud = open < SenkouA[displacement] and open < SenkouB and close < SenkouA[displacement] and close < SenkouB
+above_cloud = open > SenkouA[displacement] and open > SenkouB and close > SenkouA[displacement] and close > SenkouB
+
+// ***********************************************************************************
+//------------------------- 200-EMA -----------------------------//
+Show200EMAs = input(true, title='Show 200-EMAs Oscillators')
+
+EMA1 = request.security(syminfo.tickerid, '30', ta.ema(close, 200))
+EMA2 = request.security(syminfo.tickerid, '240', ta.ema(close, 200))
+EMA3 = request.security(syminfo.tickerid, 'D', ta.ema(close, 200))
+
+// ***********************************************************************************
+//------------------------- Stochastic RSI -----------------------------//
+ShowStochRSI = input(true, title='Show Stochastic RSI')
+
+StochRSIsmoothK = 1
+StochRSIsmoothD = 1
+StochRSIlengthRSI = 100
+StochRSIlengthStoch = 100
+StochRSIsrc = close
+
+StochRSIrsi1 = ta.rsi(StochRSIsrc, StochRSIlengthRSI)
+StochRSIk = ta.sma(ta.stoch(StochRSIrsi1, StochRSIrsi1, StochRSIrsi1, StochRSIlengthStoch), StochRSIsmoothK)
+StochRSId = ta.sma(StochRSIk, StochRSIsmoothD)
+
+// ***********************************************************************************
+//------------------------- Money Flow Index -----------------------------//
+Show_MFI = input(true, title='Show Money Flow Index')
+
+//Inputs
+MFIlength = 20
+os = 20
+ob = 80
+//CurrentRes = true
+//CustomRes = input("240", title="Custom Timeframe? Uncheck Box Above (E.g. 1M, 5D, 240 = 4Hours)")
+
+//MFI Calc
+//res = CurrentRes ? timeframe.period : CustomRes
+rawMoneyFlow = hlc3 * volume
+
+positiveMoneyFlow() =>
+    a = 0.0
+    a := hlc3 > hlc3[1] ? a + rawMoneyFlow : a
+    a
+negativeMoneyFlow() =>
+    b = 0.0
+    b := hlc3 < hlc3[1] ? b + rawMoneyFlow : b
+    b
+
+moneyFlowRatio = ta.sma(positiveMoneyFlow(), MFIlength) / ta.sma(negativeMoneyFlow(), MFIlength)
+
+moneyFlowIndex = request.security(syminfo.tickerid, timeframe.period, 100 - 100 / (1 + moneyFlowRatio))
+
+//OB/OS Identification
+MFIoversold = Show_MFI and moneyFlowIndex[1] > os[1] and moneyFlowIndex < os
+MFIoverbought = Show_MFI and moneyFlowIndex[1] < ob[1] and moneyFlowIndex > ob
+
+// ***********************************************************************************
+//------------------------- Squeeze Momentum Indicator -----------------------------//
+
+Show_SQZMOM = input(true, title='Show Squeeze Momentum')
+
+SQZMOMlength = 20  //BB Length
+mult = 2.0  //BB MultFactor
+lengthKC = 20  //KC Length
+multKC = 1.5  //KC MultFactor
+useTrueRange = true  //Use TrueRange (KC)
+
+// Calculate BB
+source = close
+basis = ta.sma(source, SQZMOMlength)
+dev = mult * ta.stdev(source, SQZMOMlength)
+upperBB = basis + dev
+lowerBB = basis - dev
+
+// Calculate KC
+ma = ta.sma(source, lengthKC)
+range_1 = useTrueRange ? ta.tr : high - low
+rangema = ta.sma(range_1, lengthKC)
+upperKC = ma + rangema * multKC
+lowerKC = ma - rangema * multKC
+
+sqzOn = lowerBB > lowerKC and upperBB < upperKC
+sqzOff = lowerBB < lowerKC and upperBB > upperKC
+noSqz = sqzOn == false and sqzOff == false
+
+val = ta.linreg(source - math.avg(math.avg(ta.highest(high, lengthKC), ta.lowest(low, lengthKC)), ta.sma(close, lengthKC)), lengthKC, 0)
+
+// 10 = maroon/Go Long  |  12 = Green/Go Short  |  22 = red/ExitShort  |  11 = lime/Exit Long
+iff_1 = val > nz(val[1]) ? 11 : 12
+iff_2 = val < nz(val[1]) ? 22 : 10
+sqz_position = val > 0 ? iff_1 : iff_2
+
+sqzGoLong = sqzOff and sqz_position == 11 and val < 51
+sqzGoShort = sqzOff and sqz_position == 22 and val > -51
+//sqzExitLong = sqzOff and (sqz_position == 11)
+//sqzExitShort = sqzOff and (sqz_position == 22)
+
+// ***********************************************************************************
+//------------------- Fibonacci Resistance & Support Levels ------------------------//
+
+Show_ResSup = input(true, title='Show Fibonacci Resistance & Support Levels')
+
+use_monthly = true
+months_in = 1  //Months for Monthly Basis (this is limited by max lookback at your resolution!)"
+use_weekly = true
+weeks_in = 2  //Weeks for Weekly Basis
+use_daily = true
+days_in = 7  //Days for Daily Basis
+hold_intraday = true
+connect_lines = false  //Connect Sup/Res Crosses with a Line?
+
+zigzag(_price, _high, _low, _depth, _filter) =>
+    _offset = math.max(math.floor(_depth / 2), 2)
+    _deviation = ta.highest(ta.stdev(_price[_offset], 50) / nz(_price[_offset], 1), 100) * (1 - _filter / 100)
+    _window = int(na)
+    _window := nz(_window[1]) + 1
+    _long_enough = _window >= _depth
+    _top = _high[_offset - 1] < nz(_high[_offset])
+    _bottom = _low[_offset - 1] > nz(_low[_offset])
+    _zz_candidate = (_top or _bottom) and _long_enough
+    _last_extreme = _high[_offset]
+    _last_extreme := nz(_last_extreme[1])
+    if _top and _bottom
+        if math.abs(_last_extreme - _high[_offset]) > math.abs(_last_extreme - _low[_offset])
+            _bottom := false
+            _bottom
+        else
+            _top := false
+            _top
+    _this_extreme = _top ? _high[_offset] : _bottom ? _low[_offset] : na
+    _zz_found = _zz_candidate and _long_enough and math.abs(_this_extreme - _last_extreme) / nz(_price[_offset], 1) > _deviation or _high[_offset] >= ta.highest(_high, _depth) or _low[_offset] <= ta.lowest(_low, _depth)
+    if _zz_found
+        _last_extreme := _this_extreme
+        _window := 0
+        _window
+    _zigzag = _zz_found ? _this_extreme : na
+    _zigzag
+
+
+fib_source = 'Monthly'  //"Draw Fibonacci Levels For Which Basis Pair?", options=["None", "Monthly", "Weekly", "Daily", "Hourly", "Minutes"]
+fib_invert = false
+
+
+daysinweek = 7
+
+months = months_in % 12
+year_months = math.floor(months_in / 12) * 12  //*12 added after commenting out below
+monthly_bars = (timeframe.ismonthly ? months_in : (timeframe.isintraday ? 1440 : 1) * (year_months * 52 * daysinweek + months * 4 * daysinweek) / (timeframe.isweekly ? daysinweek : 1)) / timeframe.multiplier
+monthly_high = ta.highest(high, math.min(5000, monthly_bars))
+monthly_low = ta.lowest(low, math.min(5000, monthly_bars))
+//plot(n)
+weeks = weeks_in % 52
+year_weeks = math.floor(weeks_in / 52) * daysinweek
+weekly_bars = (timeframe.isweekly ? weeks_in : (timeframe.isintraday ? 1440 : 1) * (year_weeks * 52 * daysinweek + weeks * daysinweek) / (timeframe.ismonthly ? 4 * daysinweek : 1)) / timeframe.multiplier
+weekly_high = ta.highest(high, math.min(5000, weekly_bars))
+weekly_low = ta.lowest(low, math.min(5000, weekly_bars))
+
+days = timeframe.ismonthly ? math.max(days_in, 4 * daysinweek) : timeframe.isweekly ? math.max(days_in, daysinweek) : days_in
+daily_bars = (timeframe.isdaily ? days : (timeframe.isintraday ? 1440 : 1) * days / ((timeframe.ismonthly ? 4 * daysinweek : 1) * (timeframe.isweekly ? daysinweek : 1))) / timeframe.multiplier
+daily_high = ta.highest(high, math.min(5000, daily_bars))
+daily_low = ta.lowest(low, math.min(5000, daily_bars))
+
+flat_monthly_high = high
+flat_monthly_low = low
+flat_weekly_high = high
+flat_weekly_low = low
+flat_daily_high = high
+flat_daily_low = low
+
+flat_monthly_high := ta.change(dayofmonth) ? monthly_high : na(monthly_high) ? na : nz(flat_monthly_high[1], na(monthly_high[1]) ? monthly_high : high)
+flat_monthly_low := ta.change(dayofmonth) ? monthly_low : na(monthly_low) ? na : nz(flat_monthly_low[1], na(monthly_low[1]) ? monthly_low : low)
+flat_weekly_high := ta.change(dayofmonth) ? weekly_high : na(weekly_high) ? na : nz(flat_weekly_high[1], na(weekly_high[1]) ? weekly_high : high)
+flat_weekly_low := ta.change(dayofmonth) ? weekly_low : na(weekly_low) ? na : nz(flat_weekly_low[1], na(weekly_low[1]) ? weekly_low : low)
+flat_daily_high := ta.change(dayofmonth) ? daily_high : na(daily_high) ? na : nz(flat_daily_high[1], na(daily_high[1]) ? daily_high : high)
+flat_daily_low := ta.change(dayofmonth) ? daily_low : na(daily_low) ? na : nz(flat_daily_low[1], na(daily_low[1]) ? daily_low : low)
+
+plot_monthly_high = hold_intraday ? flat_monthly_high : monthly_high
+plot_monthly_low = hold_intraday ? flat_monthly_low : monthly_low
+plot_weekly_high = hold_intraday ? flat_weekly_high : weekly_high
+plot_weekly_low = hold_intraday ? flat_weekly_low : weekly_low
+plot_daily_high = hold_intraday ? flat_daily_high : daily_high
+plot_daily_low = hold_intraday ? flat_daily_low : daily_low
+
+fhigh = float(na)
+flow = float(na)
+
+if fib_source != 'None'
+    fhigh := fib_source == 'Monthly' ? plot_monthly_high : fib_source == 'Weekly' ? plot_weekly_high : fib_source == 'Daily' ? plot_daily_high : na
+    flow := fib_source == 'Monthly' ? plot_monthly_low : fib_source == 'Weekly' ? plot_weekly_low : fib_source == 'Daily' ? plot_daily_low : na
+    flow
+
+calc_fib(_max, _min, _dir) =>
+    _diff = _max - _min
+    _236 = _diff * 0.236 * (_dir ? -1 : 1) + (_dir ? _max : _min)
+    _382 = _diff * 0.382 * (_dir ? -1 : 1) + (_dir ? _max : _min)
+    _500 = _diff * 0.5 * (_dir ? -1 : 1) + (_dir ? _max : _min)
+    _618 = _diff * 0.618 * (_dir ? -1 : 1) + (_dir ? _max : _min)
+    _786 = _diff * 0.786 * (_dir ? -1 : 1) + (_dir ? _max : _min)
+    _1618 = _diff * 1.618 * (_dir ? -1 : 1) + (_dir ? _max : _min)
+    [_236, _382, _500, _618, _786, _1618]
+
+[F236, F382, F500, F618, F786, F1618] = calc_fib(fhigh, flow, fib_invert)
+p236 = plot(Show_ResSup ? F236 : na, color=color.new(color.red, 0), editable=false)
+p382 = plot(Show_ResSup ? F382 : na, color=color.new(color.yellow, 0), editable=false)
+p500 = plot(Show_ResSup ? F500 : na, color=color.new(color.lime, 0), editable=false)
+p618 = plot(Show_ResSup ? F618 : na, color=color.new(color.aqua, 0), editable=false)
+p786 = plot(Show_ResSup ? F786 : na, color=color.new(color.teal, 0), editable=false)
+p1618 = plot(Show_ResSup ? F1618 : na, color=color.new(color.blue, 0), editable=false)
+
+color_monthly_high = use_monthly ? color.gray : na
+color_monthly_low = use_monthly ? color.gray : na
+pMh = plot(Show_ResSup and use_monthly ? plot_monthly_high : high, style=plot.style_cross, color=color_monthly_high, linewidth=4, join=connect_lines, editable=false, transp=65)  //change plotted values for better autoscaling
+pMl = plot(Show_ResSup and use_monthly ? plot_monthly_low : low, style=plot.style_cross, color=color_monthly_low, linewidth=4, join=connect_lines, editable=false, transp=80)
+
+color_weekly_high = use_weekly ? color.red : na
+color_weekly_low = use_weekly ? color.red : na
+pwh = plot(Show_ResSup and use_weekly ? plot_weekly_high : high, style=plot.style_circles, color=color_weekly_high, linewidth=3, join=connect_lines, editable=false, transp=65)
+pwl = plot(Show_ResSup and use_weekly ? plot_weekly_low : low, style=plot.style_circles, color=color_weekly_low, linewidth=3, join=connect_lines, editable=false, transp=80)
+
+color_daily_high = use_daily ? color.blue : na
+color_daily_low = use_daily ? color.blue : na
+pdh = plot(Show_ResSup and use_daily ? plot_daily_high : high, style=plot.style_cross, color=color_daily_high, linewidth=3, join=connect_lines, editable=false, transp=65)
+pdl = plot(Show_ResSup and use_daily ? plot_daily_low : low, style=plot.style_cross, color=color_daily_low, linewidth=3, join=connect_lines, editable=false, transp=80)
+
+fphigh = fib_invert ? flow : fhigh
+fplow = fib_invert ? fhigh : flow
+phigh = plot(Show_ResSup ? fphigh : na, color=na, editable=false)
+plow = plot(Show_ResSup ? fplow : na, color=na, editable=false)
+
+// ***********************************************************************************
+//------------------------------------ Wave trend ----------------------------------//
+
+//Overbought level = 60 | Oversold Level = -60
+
+Wave_Signals = input(true, title='Show WaveTrend Signals')
+
+n1 = 9  //defval=10, "Channel Length"
+n2 = 12  //defval=21, "Average Length"
+
+ap = hlc3
+esa = ta.ema(ap, n1)
+d = ta.ema(math.abs(ap - esa), n1)
+ci = (ap - esa) / (0.015 * d)
+tci = ta.ema(ci, n2)
+
+wt1 = tci
+wt2 = ta.sma(wt1, 3)
+
+WT_OS = wt1 < -60 and ta.crossover(wt1, wt2)
+WT_OB = wt1 > 60 and ta.crossover(wt2, wt1)
+
+//wave_over_size = false
+//if ((wt2 < -50) or (wt2 > 50))
+//	wave_over_size := true
+// ***********************************************************************************
+//-----------------------------  Parabolic SAR -------------------------------------//
+
+Parabolic_Sar = input(false, title='Parabolic SAR')
+
+SARout = ta.sar(0.02, 0.02, 0.07)
+plot(Parabolic_Sar ? SARout : na, 'ParabolicSAR', style=plot.style_circles, color=color.new(#3A6CA8, 0), linewidth=2, editable=false)
+
+// ***********************************************************************************
+//-------------------------------  Candle Patterns----------------------------------//
+
+Candle_patterns = input(true, title='Show Doji Patterns')
+
+//Doji
+//DojiSize = input(0.03, minval=0.01, title="Doji size")
+doji = math.abs(open - close) <= (high - low) * 0.03 and math.abs((high + low) * 0.5 - (open + close) * 0.5) / (high - low) <= 0.4
+barcolor(Candle_patterns and doji ? color.yellow : na, editable=false)
+
+flydragondoji = math.abs(open - close) <= (high - low) * 0.03 and ((high + low) * 0.5 - (open + close) * 0.5) / (high - low) <= -0.4
+plotshape(Candle_patterns ? flydragondoji : na, title='FlyDragon Doji', text='FlyDragon Doji', editable=false)
+
+gravestonedoji = math.abs(open - close) <= (high - low) * 0.03 and ((high + low) * 0.5 - (open + close) * 0.5) / (high - low) >= 0.4
+plotshape(Candle_patterns ? gravestonedoji : na, title='Gravestone Doji', text='Gravestone Doji', editable=false)
+
+//Doji2
+//Precision = input(0.15, minval=0.0001, title="Doji's Max Body size")
+doji2 = math.abs(open - close) <= (high - low) * 0.15 ? 1 : 0
+barcolor(Candle_patterns and doji2 ? color.yellow : na, editable=false)
+
+//Bearish Evening Star
+//estar=(close[2] > open[2] and close < open and abs(close[2] - open[2]) > 4*abs(close[1] - open[1]) and abs(open - close) > 4*abs(close[1] - open[1]))
+//plotshape(Candle_patterns ? estar : na, title= "Bearish Evening Star", color=color.red, style=shape.arrowdown, text="Bearish\nEvening\nStar", editable=false)
+
+//Bullish Morning Star
+//mstar=(close[2] < open[2] and close > open and abs(close[2] - open[2]) > 4*abs(close[1] - open[1]) and abs(open - close) > 4*abs(close[1] - open[1]))
+//plotshape(Candle_patterns ? mstar : na,  title= "Bullish Morning Star", location=location.belowbar, color=color.lime, style=shape.arrowup, text="Bullish\nMorning\nStar", editable=false)
+
+//Bullish Shooting Star
+//sstar=(high - max(open, close) >= abs(open - close) * 3 and min(close, open) - low <= abs(open - close)*0.5)
+//plotshape(Candle_patterns ? sstar : na, title= "Bullish Shooting Star", color=color.red, style=shape.arrowdown, text="Bullish\nShooting\nStar", editable=false)
+
+//Bearish Hammer
+//hammer=(abs(low - min(open, close)) >= abs(open - close) * 3 and high - max(close, open) <= abs(open - close)*0.5)
+//plotshape(Candle_patterns ? hammer : na, title= "Bearish Hammer", location=location.belowbar, style=shape.diamond, text="Bearish\nHammer", editable=false)
+
+//Bearish Harami
+//bearH=(close[2] > open[2] and open < close[2] and open > open[2] and close < close[2] and close > open[2] and high < close[2] )
+//plotshape(Candle_patterns ? bearH : na, title= "Bearish Harami",  color=color.red, style=shape.arrowdown, text="Bearish\nHarami", editable=false)
+
+//Bullish Harami
+//bullH=(close[2] < open[2] and open < open[2] and open > close[2] and close < open[2] and close > close[2] and low > close[2] )
+//plotshape(Candle_patterns ? bullH : na,  title= "Bullish Harami", location=location.belowbar, color=color.lime, style=shape.arrowup, text="Bullish\nHarami", editable=false)
+
+//Bearish Engulfing
+//bearE=(close[2] > open[2] and close < open and close[2] > close and close[2] < open and open[2] > close and open[2] < open and high[2] < open )
+//plotshape(Candle_patterns ? bearE : na,  title= "Bearish Engulfing", color=color.red, style=shape.arrowdown, text="Bearish\nEngulfing", editable=false)
+
+//Bullish Engulfing
+//bullE=(close[2] < open[2] and close > open and close[2] < close and close[2] > open and open[2] < close and open[2] > open and low[2] > open )
+//plotshape(Candle_patterns ? bullE : na, title= "Bullish Engulfing", location=location.belowbar, color=color.lime, style=shape.arrowup, text="Bullish\nEngulfling", editable=false)
+
+//Bearish Dark Cloud Cover
+//dcc=((close[2]>open[2])and(((close[2]+open[2])/2)>close)and(open>close)and(open>close[2])and(close>open[2])and((open-close)/(.001+(high-low))>0.6))
+//plotshape(Candle_patterns ? dcc : na, title= "Bearish Dark Cloud Cover", color=color.red, style=shape.arrowdown, text="Bearish\nDark\nCloudCover", editable=false)
+
+// ***********************************************************************************
+//-------------------------------  Hull MA -----------------------------------------//
+
+Hullength = 50
+HullSrc = close
+Show_Hull = input(true, title='Show Hull-T3 Lines & Signals')
+hullma = ta.wma(2 * ta.wma(HullSrc, Hullength / 2) - ta.wma(HullSrc, Hullength), math.round(math.sqrt(Hullength)))
+plot(Show_Hull ? hullma : na, color=color.new(color.green, 0), linewidth=4, editable=false)
+
+// ***********************************************************************************
+//-------------------------------  Tillson MA --------------------------------------//
+
+length1 = 20
+a1 = 0.7
+
+e1 = ta.ema((high + low + 2 * close) / 4, length1)
+e2 = ta.ema(e1, length1)
+e3 = ta.ema(e2, length1)
+e4 = ta.ema(e3, length1)
+e5 = ta.ema(e4, length1)
+e6 = ta.ema(e5, length1)
+c1 = -a1 * a1 * a1
+c2 = 3 * a1 * a1 + 3 * a1 * a1 * a1
+c3 = -6 * a1 * a1 - 3 * a1 - 3 * a1 * a1 * a1
+c4 = 1 + 3 * a1 + a1 * a1 * a1 + 3 * a1 * a1
+T3 = c1 * e6 + c2 * e5 + c3 * e4 + c4 * e3
+
+col1 = T3 > T3[1]
+col3 = T3 < T3[1]
+plot(Show_Hull ? T3 : na, color=color.new(color.red, 0), linewidth=4, title='T3', editable=false)
+
+T3HullLE = ta.crossover(hullma, T3) and wt2 < 25
+T3HullSE = ta.crossover(T3, hullma) and wt2 > -25
+// ***********************************************************************************
+//------------------------------ Price-info Label -----------------------------------//
+
+Show_Price = input(true, title='Show Price-info Label')
+
+stoploss_price_long = low - 2 * ta.atr(30)
+stoploss_price_short = high + 2 * ta.atr(30)
+
+if close > open and barstate.islast and Show_Price
+    PriceLabel = label.new(bar_index, high, text='Stoploss Long= ' + str.tostring(stoploss_price_long, '#.####') + '\nStoploss Short= ' + str.tostring(stoploss_price_short, '#.####') + '\nWT= ' + str.tostring(wt2, '#.##') + ' (-64 -> 64)' + '\nSQZ MOM= ' + str.tostring(val, '#.##') + ' (-200 -> 200)' + '\nMFI= ' + str.tostring(moneyFlowIndex, '#.##') + ' (20 -> 80)' + '\nRSI= ' + str.tostring(RsiValue14, '#.##') + ' (20 -> 80)', style=label.style_label_down, color=#a8dadc)
+    label.set_textcolor(PriceLabel, textcolor=color.black)
+    label.delete(PriceLabel[1])
+
+if open > close and barstate.islast and Show_Price
+    PriceLabel = label.new(bar_index, low, text='Stoploss Long= ' + str.tostring(stoploss_price_long, '#.####') + '\nStoploss Short= ' + str.tostring(stoploss_price_short, '#.####') + '\nWT= ' + str.tostring(wt2, '#.##') + ' (-64 -> 64)' + '\nSQZ MOM= ' + str.tostring(val, '#.##') + ' (-200 -> 200)' + '\nMFI= ' + str.tostring(moneyFlowIndex, '#.##') + ' (20 -> 80)' + '\nRSI= ' + str.tostring(RsiValue14, '#.##') + ' (20 -> 80)', style=label.style_label_up, color=#a8dadc)
+    label.set_textcolor(PriceLabel, textcolor=color.black)
+    label.delete(PriceLabel[1])
+
+// ***********************************************************************************
+//---------------------------------- Conditions ------------------------------------//
+
+LongConditions = T3HullLE or sqzGoLong or WT_OS or ta.crossover(ZEMA_50_30, ZEMA_200_30) or ta.crossover(ZEMA_50_4, ZEMA_200_4) or ta.crossover(ZEMA_50_d, ZEMA_200_d) or ta.crossover(Tenkan, Kijun) or ta.crossover(ZEMA_13_30, ZEMA_48_30) or MFIoversold
+
+ShortConditions = T3HullSE or sqzGoShort or WT_OB or ta.crossover(ZEMA_200_30, ZEMA_50_30) or ta.crossover(ZEMA_200_4, ZEMA_50_4) or ta.crossover(ZEMA_200_d, ZEMA_50_d) or ta.crossover(Kijun, Tenkan) or ta.crossover(ZEMA_48_30, ZEMA_13_30) or MFIoverbought
+
+// ***********************************************************************************
+//------------------------------------ Labels and Arrows --------------------------------------//
+plot(Show_Hull and (T3HullLE or T3HullSE) ? hullma : na, style=plot.style_cross, color=color.new(color.black, 0), linewidth=4, editable=false)
+plot(ShowTenkanKijun and ta.cross(Tenkan, Kijun) ? Tenkan : na, style=plot.style_cross, color=color.new(color.black, 0), linewidth=4, editable=false)
+
+OSCsCoefficient = 0.0
+if open > 20000
+    OSCsCoefficient := 0.0335
+    OSCsCoefficient
+if open > 5000 and open < 20000
+    OSCsCoefficient := 0.0067
+    OSCsCoefficient
+if 300 < open and open < 5000
+    OSCsCoefficient := 0.019
+    OSCsCoefficient
+if 10 < open and open < 300
+    OSCsCoefficient := 0.06
+    OSCsCoefficient
+if open < 10
+    OSCsCoefficient := 0.02
+    OSCsCoefficient
+
+
+//EMAs Crosses
+//EMA-30
+if ShowEMA_30_Crosses and ta.crossover(ZEMA_50_30, ZEMA_200_30)
+    EMA_30_Cross_up = label.new(bar_index, low - 0.0035 * low, text='ZEMA Cx\n50|200\n(30m)', style=label.style_label_up, color=#0CCD00)
+    label.set_textcolor(EMA_30_Cross_up, textcolor=color.white)
+
+if ShowEMA_30_Crosses and ta.crossover(ZEMA_200_30, ZEMA_50_30)
+    EMA_30_Cross_down = label.new(bar_index, high + 0.0035 * high, text='ZEMA Cx\n200|50\n(30m)', style=label.style_label_down, color=#FF0000)
+    label.set_textcolor(EMA_30_Cross_down, textcolor=color.white)
+
+//EMA 13|48 at 30m
+if ShowEMA_1348_Crosses and ta.crossover(ZEMA_13_30, ZEMA_48_30)
+    EMA_1348_Cross_up = label.new(bar_index, low - 0.0035 * low, text='ZEMA Cx\n13|48\n(30m)', style=label.style_label_up, color=#0CCD00)
+    label.set_textcolor(EMA_1348_Cross_up, textcolor=color.white)
+
+if ShowEMA_1348_Crosses and ta.crossover(ZEMA_48_30, ZEMA_13_30)
+    EMA_1348_Cross_down = label.new(bar_index, high + 0.0035 * high, text='ZEMA Cx\n48|13\n(30m)', style=label.style_label_down, color=#FF0000)
+    label.set_textcolor(EMA_1348_Cross_down, textcolor=color.white)
+
+//EMA-4H
+if ShowEMA_4_Crosses and ta.crossover(ZEMA_50_4, ZEMA_200_4)
+    EMA_4h_Cross_up = label.new(bar_index, low - 0.0035 * low, text='ZEMA Cx\n50|200\n(4H)', style=label.style_label_up, color=#0CCD00)
+    label.set_textcolor(EMA_4h_Cross_up, textcolor=color.white)
+
+if ShowEMA_4_Crosses and ta.crossover(ZEMA_200_4, ZEMA_50_4)
+    EMA_4h_Cross_down = label.new(bar_index, high + 0.0035 * high, text='ZEMA Cx\n200|50\n(4H)', style=label.style_label_down, color=#FF0000)
+    label.set_textcolor(EMA_4h_Cross_down, textcolor=color.white)
+
+//EMA-D
+if ShowEMA_d_Crosses and ta.crossover(ZEMA_50_d, ZEMA_200_d)
+    EMA_d_Cross_up = label.new(bar_index, low - 0.0035 * low, text='ZEMA Cx\n50|200\n(D)', style=label.style_label_up, color=#0CCD00)
+    label.set_textcolor(EMA_d_Cross_up, textcolor=color.white)
+
+
+if ShowEMA_d_Crosses and ta.crossover(ZEMA_200_d, ZEMA_50_d)
+    EMA_d_Cross_down = label.new(bar_index, high + 0.0035 * high, text='ZEMA Cx\n200|50\n(D)', style=label.style_label_down, color=#FF0000)
+    label.set_textcolor(EMA_d_Cross_down, textcolor=color.white)
+
+
+//200 EMAs Oscillators
+//30m	
+if Show200EMAs and barstate.islast and close > EMA1 + EMA1 * 0.002 and open > EMA1 + EMA1 * 0.002
+    PriceEmaPos1 = label.new(x=time, y=open + open * OSCsCoefficient, xloc=xloc.bar_time, text='200EMA\n(30m)', style=label.style_arrowup, color=color.green)
+    label.set_x(id=PriceEmaPos1, x=label.get_x(id=PriceEmaPos1) + 16200000)
+    label.set_size(PriceEmaPos1, size.normal)
+    label.delete(id=PriceEmaPos1[1])
+if Show200EMAs and barstate.islast and close < EMA1 - EMA1 * 0.002 and open < EMA1 - EMA1 * 0.002
+    PriceEmaPos1 = label.new(x=time, y=open + open * OSCsCoefficient, xloc=xloc.bar_time, text='200EMA\n(30m)', style=label.style_arrowdown, color=color.red)
+    label.set_x(id=PriceEmaPos1, x=label.get_x(id=PriceEmaPos1) + 16200000)
+    label.set_size(PriceEmaPos1, size.normal)
+    label.delete(id=PriceEmaPos1[1])
+
+//4H - EMA
+if Show200EMAs and barstate.islast and close > EMA2 + EMA2 * 0.002 and open > EMA2 + EMA2 * 0.002
+    PriceEmaPos2 = label.new(x=time, y=open + open * OSCsCoefficient, xloc=xloc.bar_time, text='200EMA\n(4H)', style=label.style_arrowup, color=color.green)
+    label.set_x(id=PriceEmaPos2, x=label.get_x(id=PriceEmaPos2) + 19800000)
+    label.set_size(PriceEmaPos2, size.normal)
+    label.delete(id=PriceEmaPos2[1])
+if Show200EMAs and barstate.islast and close < EMA2 - EMA2 * 0.002 and open < EMA2 - EMA2 * 0.002
+    PriceEmaPos2 = label.new(x=time, y=open + open * OSCsCoefficient, xloc=xloc.bar_time, text='200EMA\n(4H)', style=label.style_arrowdown, color=color.red)
+    label.set_x(id=PriceEmaPos2, x=label.get_x(id=PriceEmaPos2) + 19800000)
+    label.set_size(PriceEmaPos2, size.normal)
+    label.delete(id=PriceEmaPos2[1])
+
+//4H - ZEMA
+if Show200EMAs and barstate.islast and close > ZEMA_200_4 + ZEMA_200_4 * 0.002 and open > ZEMA_200_4 + ZEMA_200_4 * 0.002
+    PriceEmaPos3 = label.new(x=time, y=open + open * OSCsCoefficient, xloc=xloc.bar_time, text='200ZEMA\n(4H)', style=label.style_arrowup, color=color.green)
+    label.set_x(id=PriceEmaPos3, x=label.get_x(id=PriceEmaPos3) + 23400000)
+    label.set_size(PriceEmaPos3, size.normal)
+    label.delete(id=PriceEmaPos3[1])
+if Show200EMAs and barstate.islast and close < ZEMA_200_4 - ZEMA_200_4 * 0.002 and open < ZEMA_200_4 - ZEMA_200_4 * 0.002
+    PriceEmaPos3 = label.new(x=time, y=open + open * OSCsCoefficient, xloc=xloc.bar_time, text='200ZEMA\n(4H)', style=label.style_arrowdown, color=color.red)
+    label.set_x(id=PriceEmaPos3, x=label.get_x(id=PriceEmaPos3) + 23400000)
+    label.set_size(PriceEmaPos3, size.normal)
+    label.delete(id=PriceEmaPos3[1])
+
+//D	
+if Show200EMAs and barstate.islast and close > EMA3 + EMA3 * 0.002 and open > EMA3 + EMA3 * 0.002
+    PriceEmaPos4 = label.new(x=time, y=open + open * OSCsCoefficient, xloc=xloc.bar_time, text='200EMA\n(D)', style=label.style_arrowup, color=color.green)
+    label.set_x(id=PriceEmaPos4, x=label.get_x(id=PriceEmaPos4) + 27000000)
+    label.set_size(PriceEmaPos4, size.normal)
+    label.delete(id=PriceEmaPos4[1])
+if Show200EMAs and barstate.islast and close < EMA3 - EMA3 * 0.002 and open < EMA3 - EMA3 * 0.002
+    PriceEmaPos4 = label.new(x=time, y=open + open * OSCsCoefficient, xloc=xloc.bar_time, text='200EMA|\n(D)', style=label.style_arrowdown, color=color.red)
+    label.set_x(id=PriceEmaPos4, x=label.get_x(id=PriceEmaPos4) + 27000000)
+    label.set_size(PriceEmaPos4, size.normal)
+    label.delete(id=PriceEmaPos4[1])
+
+//StochRSI
+if ShowStochRSI and barstate.islast and StochRSId > 50
+    StochRSI_Position = label.new(x=time, y=open, xloc=xloc.bar_time, text='StochRSI', style=label.style_arrowup, color=color.green)
+    label.set_x(id=StochRSI_Position, x=label.get_x(id=StochRSI_Position) + 23400000)
+    label.set_size(StochRSI_Position, size.normal)
+    label.delete(id=StochRSI_Position[1])
+
+if ShowStochRSI and barstate.islast and StochRSId < 50
+    StochRSI_Position = label.new(x=time, y=open, xloc=xloc.bar_time, text='StochRSI', style=label.style_arrowdown, color=color.red)
+    label.set_x(id=StochRSI_Position, x=label.get_x(id=StochRSI_Position) + 23400000)
+    label.set_size(StochRSI_Position, size.normal)
+    label.delete(id=StochRSI_Position[1])
+
+//SQZ Mom
+if Show_SQZMOM and sqzGoLong
+    SqzMomLabel = label.new(bar_index, low - 0.0035 * low, text='SQZ MOM\nLE', style=label.style_label_up, color=#0CCD00)
+    SqzMomLabel
+
+if Show_SQZMOM and sqzGoShort
+    SqzMomLabel = label.new(bar_index, high + 0.0035 * high, text='SQZ MOM\nSE', style=label.style_label_down, color=#FF0000)
+    label.set_textcolor(SqzMomLabel, textcolor=color.white)
+
+//MFI
+//Oscillators
+//Long
+if Show_MFI and barstate.islast and moneyFlowIndex > 51
+    MFIchangeRate = label.new(x=time, y=open, xloc=xloc.bar_time, text='MFI', style=label.style_arrowup, color=color.green)
+    label.set_x(id=MFIchangeRate, x=label.get_x(id=MFIchangeRate) + 19800000)
+    label.set_size(MFIchangeRate, size.normal)
+    label.delete(id=MFIchangeRate[1])
+//Short	
+if Show_MFI and barstate.islast and moneyFlowIndex < 49
+    MFIchangeRate = label.new(x=time, y=open, xloc=xloc.bar_time, text='MFI', style=label.style_arrowdown, color=color.red)
+    label.set_x(id=MFIchangeRate, x=label.get_x(id=MFIchangeRate) + 19800000)
+    label.set_size(MFIchangeRate, size.normal)
+    label.delete(id=MFIchangeRate[1])
+
+//Positions:
+//Overbought
+if Show_MFI and MFIoverbought
+    MfiLabel = label.new(bar_index, high + 0.003 * high, text='MFI OB\n(Exit Long)', style=label.style_label_down, color=#d62828)
+    label.set_textcolor(MfiLabel, textcolor=color.white)
+
+//Oversold
+if Show_MFI and MFIoversold
+    MfiLabel = label.new(bar_index, low - 0.003 * low, text='MFI OS\n(Exit Short)', style=label.style_label_up, color=#007f5f)
+    label.set_textcolor(MfiLabel, textcolor=color.white)
+
+//RSI
+//Overbought
+if ShowRSI and RsiValue14 > 89
+    RsiLabel = label.new(bar_index, high + 0.003 * high, text='RSI OB', style=label.style_label_down, color=#d62828)
+    label.set_textcolor(RsiLabel, textcolor=color.white)
+
+//Oversold
+if ShowRSI and RsiValue14 < 11
+    RsiLabel = label.new(bar_index, low - 0.003 * low, text='RSI OS', style=label.style_label_up, color=#007f5f)
+    label.set_textcolor(RsiLabel, textcolor=color.white)
+
+
+//Wave Trend Oversize
+//if Wave_Signals and wave_over_size and barstate.islast
+//	label0 = label.new(bar_index, high + 100, style=label.style_flag, color=#ffbe0b)
+//	label.delete(id=label0[1])
+
+//Aligator
+if barstate.islast and ShowAlligator and AlligatorState == 1
+    alligator_state = label.new(x=time, y=open - open * OSCsCoefficient, xloc=xloc.bar_time, text='🐊 Alligator is Hunting the Bulls 🐮\n(@1H)', textalign=text.align_center, style=label.style_none, color=#f0f3fa)
+    label.set_x(id=alligator_state, x=label.get_x(id=alligator_state) + 21600000)
+    label.set_size(alligator_state, size.large)
+    label.delete(id=alligator_state[1])
+
+if barstate.islast and ShowAlligator and AlligatorState == -1
+    alligator_state = label.new(x=time, y=open - open * OSCsCoefficient, xloc=xloc.bar_time, text='🐊 Alligator is Hunting the Bears 🐻\n(@1H)', textalign=text.align_center, style=label.style_none, color=#f0f3fa)
+    label.set_x(id=alligator_state, x=label.get_x(id=alligator_state) + 21600000)
+    label.set_size(alligator_state, size.large)
+    label.delete(id=alligator_state[1])
+
+if barstate.islast and ShowAlligator and AlligatorState != -1 and AlligatorState != 1
+    alligator_state = label.new(x=time, y=open - open * OSCsCoefficient, xloc=xloc.bar_time, text='🐊 Alligator is Sleep 💤\n(@1H)', textalign=text.align_center, style=label.style_none, color=#f0f3fa)
+    label.set_x(id=alligator_state, x=label.get_x(id=alligator_state) + 21600000)
+    label.set_size(alligator_state, size.large)
+    label.delete(id=alligator_state[1])
+
+//Copyright
+if barstate.islast
+    LegendBox = label.new(x=time, y=open - open * 2 * OSCsCoefficient, xloc=xloc.bar_time, text='Ali Rajabpour-Sanati\nali.poursanati@gmail.com', textalign=text.align_center, style=label.style_none, color=#f0f3fa)
+    label.set_x(id=LegendBox, x=label.get_x(id=LegendBox) + 21600000)
+    label.set_size(LegendBox, size.normal)
+    label.delete(id=LegendBox[1])
+
+//Long Positions
+
+if T3HullLE and Show_Hull
+    label1 = label.new(bar_index, low, text='T3-Hull LE', style=label.style_label_up, color=#0CCD00)
+    label1
+
+if WT_OS and Wave_Signals
+    label1 = label.new(bar_index, low, text='WT LE', style=label.style_label_up, color=#0CCD00)
+    label1
+
+if ShowTenkanKijunLables and ta.crossover(Tenkan, Kijun)
+    labelTenkan = label.new(bar_index, low, text='Tenkan|Kijun\nCx', style=label.style_label_up, color=#0CCD00)
+    labelTenkan
+
+
+//Short Positions
+
+if T3HullSE and Show_Hull
+    label2 = label.new(bar_index, high, text='T3-Hull SE', style=label.style_label_down, color=#FF0000)
+    label.set_textcolor(label2, textcolor=color.white)
+
+if WT_OB and Wave_Signals
+    label2 = label.new(bar_index, high, text='WT SE', style=label.style_label_down, color=#FF0000)
+    label.set_textcolor(label2, textcolor=color.white)
+
+if ShowTenkanKijunLables and ta.crossover(Kijun, Tenkan)
+    labelTenkan = label.new(bar_index, high, text='Kijun|Tenkan\nCx', style=label.style_label_down, color=#FF0000)
+    label.set_textcolor(labelTenkan, textcolor=color.white)
+
+
+//barcolor(T3HullLE or T3HullLE2 ? #358600 : na, editable=false)
+//barcolor(T3HullSE or T3HullSE2 ? #d00000 : na, editable=false)
+
+// ***********************************************************************************
+//------------------------------------ Angle of HMA --------------------------------//
+
+HMA_for_angle = ta.wma(2 * ta.wma(close, 42 / 2) - ta.wma(close, 42), math.round(math.sqrt(42)))
+rad2degree = 180 / 3.141592653589793238462643  //pi 
+ang = rad2degree * math.atan((HMA_for_angle[0] - HMA_for_angle[2]) / ta.atr(10) / 2)
+
+upward = ang > ang[1] and (ang > 6 or ang < -6)
+downward = ang < ang[1] and (ang > 6 or ang < -6)
+
+//color_ang = upward ? color.lime : downward ? color.red : na
+exit_position = hullma > T3 and downward or hullma < T3 and upward
+color_ang = exit_position ? color.red : na
+
+//long_stop = ((downward and upward[1])) ? true : false
+//short_stop = ((upward and downward[1])) ? true : false
+//plotshape(long_stop, title = "Exit Long", text = 'Exit Long')
+//plotshape(short_stop, title = "Exit Short", text = 'Exit Short')
+
+bgcolor(color_ang, editable=false, transp=90)
+
+// ************************************************************************************************
+//------------------------------------ Define Entry & Exit --------------------------------------//
+bullish_market = (close > ZEMA_200_30 + ZEMA_200_30 * 0.002 and open > ZEMA_200_30 + ZEMA_200_30 * 0.002 or close > EMA1 + EMA1 * 0.002 and open > EMA1 + EMA1 * 0.002) and (close > EMA2 + EMA2 * 0.002 and open > EMA2 + EMA2 * 0.002 or close > ZEMA_200_4 + ZEMA_200_4 * 0.002 and open > ZEMA_200_4 + ZEMA_200_4 * 0.002)
+
+bearish_market = (close < ZEMA_200_30 - ZEMA_200_30 * 0.002 and open < ZEMA_200_30 - ZEMA_200_30 * 0.002 or close < EMA1 - EMA1 * 0.002 and open < EMA1 - EMA1 * 0.002) and (close < EMA2 - EMA2 * 0.002 and open < EMA2 - EMA2 * 0.002 or close < ZEMA_200_4 - ZEMA_200_4 * 0.002 and open < ZEMA_200_4 - ZEMA_200_4 * 0.002)
+
+above_middle_line = open > y2 and close > y2
+below_middle_line = open < y2 and close < y2
+
+enter_long = escgo_long and below_middle_line and bullish_market and above_cloud and green_cloud and LongConditions and moneyFlowIndex < 50
+enter_short = escgo_short and above_middle_line and bearish_market and below_cloud and red_cloud and ShortConditions and moneyFlowIndex > 50
+
